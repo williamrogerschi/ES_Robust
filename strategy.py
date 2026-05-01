@@ -1,6 +1,6 @@
 """
-ES Futures Grid Trading Strategy
-Main strategy logic - imports models and indicators
+ES Futures Grid Trading Strategy - ROBUST VERSION
+Scalp robust mode only — includes MACD momentum filter.
 """
 
 import asyncio
@@ -50,21 +50,30 @@ class GridStrategy:
         self.daily_pnl: float = 0.0
         self.last_reset_day: Optional[int] = None
         self.prev_rsi: float = 50.0
+
+        # --- MACD MOMENTUM FILTER ---
+        # Stores the MACD value from the previous bar so we can check
+        # whether MACD is rising or falling when an entry signal fires.
+        self._prev_macd: float = 0.0
+
+        # Tracks every trade the MACD filter blocks for end-of-session analysis
+        self._macd_blocked_trades: List[Dict] = []
+
         self.bars_since_exit: int = 999  # Starts high so first entry is always allowed
 
         # Session low tracking for scalp_robust short filter
         self._session_low: float = float('inf')
         self._session_low_date: Optional[int] = None
 
-        # 5-minute bar aggregation (scalp_robust only)
+        # 5-minute bar aggregation
         self.bars_5m: List[Dict] = []
         self.indicators_5m = Indicators(self.config)
         self.current_trend_5m: TrendState = TrendState.SIDEWAYS
         self._5m_bar_buffer: List[Dict] = []  # accumulates 1-min bars until 5 collected
-    
+
     def _round_to_tick(self, price: float) -> float:
         return round(price / self.config.tick_size) * self.config.tick_size
-    
+
     def _determine_trend(self) -> TrendState:
         ind = self.indicators.cache
         bullish_score = 0
@@ -140,7 +149,7 @@ class GridStrategy:
         if all(t == self.trend_history[0] for t in self.trend_history):
             self.confirmed_trend = self.trend_history[0]
         return self.confirmed_trend
-    
+
     def _calculate_grid_size(self) -> float:
         base = self.config.base_grid_pct
         if self.config.use_volatility_grid and 'atr' in self.indicators.cache:
@@ -148,7 +157,7 @@ class GridStrategy:
             atr_pct = (atr / self.last_price) * 100
             return max(base, atr_pct * self.config.atr_multiplier)
         return base
-    
+
     def _should_reset_grid_anchor(self) -> bool:
         if self.confirmed_trend != self.previous_trend:
             return True
@@ -162,7 +171,7 @@ class GridStrategy:
             if distance_pct > grid_size * self.config.max_anchor_distance_grids:
                 return True
         return False
-    
+
     def _set_grid_anchor(self):
         trend = self.confirmed_trend
         grid_size = self._calculate_grid_size()
@@ -184,7 +193,7 @@ class GridStrategy:
         self.grid_anchor_price = self._round_to_tick(self.grid_anchor_price)
         self.grid_anchor_time = datetime.now(UTC)
         print(f"  🎯 Grid anchor set @ {self.grid_anchor_price:.2f} ({trend.value})")
-    
+
     def _calculate_grid_levels(self) -> List[float]:
         if not self.grid_anchor_price:
             return []
@@ -206,7 +215,7 @@ class GridStrategy:
                 levels.append(self._round_to_tick(self.grid_anchor_price + ((i + 1) * grid_step)))
                 levels.append(self._round_to_tick(self.grid_anchor_price - ((i + 1) * grid_step)))
         return sorted(levels)
-    
+
     def _calculate_position_size(self, entry_price: float) -> float:
         if self.config.use_risk_based_position:
             risk_amount = self.equity * (self.config.risk_per_trade_pct / 100)
@@ -225,6 +234,26 @@ class GridStrategy:
         if atr >= self.config.atr_high_volatility_threshold:
             return self.config.contracts_per_trade_high_vol
         return self.config.contracts_per_trade
+
+    # -------------------------------------------------------------------------
+    # MACD MOMENTUM FILTER
+    # -------------------------------------------------------------------------
+    def _macd_momentum_ok(self, direction: str) -> bool:
+        """Returns True if MACD is moving in the same direction as the trade.
+
+        For a LONG: we want MACD rising (current >= previous).
+        For a SHORT: we want MACD falling (current <= previous).
+
+        Flat (current == previous) is treated as a pass — blocking on zero
+        change is too strict and essentially never happens with floating point
+        EMA calculations anyway.
+        """
+        current_macd = self.indicators.cache.get('macd', {}).get('macd', 0.0)
+        if direction == 'long':
+            return current_macd >= self._prev_macd
+        elif direction == 'short':
+            return current_macd <= self._prev_macd
+        return True
 
     async def _check_entries_scalp(self, bar: Dict):
         total_orders = self.position_count + len(self.pending_orders)
@@ -266,9 +295,8 @@ class GridStrategy:
         rsi = self.indicators.cache.get('rsi', 50)
         current_price = bar['close']
         prev_bar = self.bars[-2]
+        current_macd = self.indicators.cache.get('macd', {}).get('macd', 0.0)
 
-        # scalp_robust: block shorts taken within session_low_short_buffer pts of session low
-        # during the first session_low_short_hours hours of trading
         def _short_blocked_by_session_low() -> bool:
             if not self.config.use_session_low_short_filter:
                 return False
@@ -289,19 +317,68 @@ class GridStrategy:
             if rsi > self.config.entry_rsi_bearish:
                 if current_price < prev_bar['low']:
                     if not _short_blocked_by_session_low():
+                        if not self._macd_momentum_ok('short'):
+                            print(f"  ⏭️ MACD filter blocked SHORT | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
+                            self._macd_blocked_trades.append({
+                                'time': bar['time'],
+                                'direction': 'short',
+                                'macd': current_macd,
+                                'prev_macd': self._prev_macd,
+                                'price': current_price,
+                                'rsi': rsi,
+                                'trend': trend.value
+                            })
+                            return
                         await self._enter_short(current_price, rsi, trend)
         elif trend in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH]:
             if rsi < self.config.entry_rsi_bullish:
                 if current_price > prev_bar['high']:
+                    if not self._macd_momentum_ok('long'):
+                        print(f"  ⏭️ MACD filter blocked LONG | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
+                        self._macd_blocked_trades.append({
+                            'time': bar['time'],
+                            'direction': 'long',
+                            'macd': current_macd,
+                            'prev_macd': self._prev_macd,
+                            'price': current_price,
+                            'rsi': rsi,
+                            'trend': trend.value
+                        })
+                        return
                     await self._enter_long(current_price, rsi, trend)
         elif trend == TrendState.SIDEWAYS:
             if rsi > self.config.entry_rsi_sideways_short:
                 if current_price < prev_bar['low']:
                     if not _short_blocked_by_session_low():
+                        if not self._macd_momentum_ok('short'):
+                            print(f"  ⏭️ MACD filter blocked SHORT (sideways) | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
+                            self._macd_blocked_trades.append({
+                                'time': bar['time'],
+                                'direction': 'short',
+                                'macd': current_macd,
+                                'prev_macd': self._prev_macd,
+                                'price': current_price,
+                                'rsi': rsi,
+                                'trend': trend.value
+                            })
+                            return
                         await self._enter_short(current_price, rsi, trend)
             elif rsi < self.config.entry_rsi_sideways_long:
                 if current_price > prev_bar['high']:
+                    if not self._macd_momentum_ok('long'):
+                        print(f"  ⏭️ MACD filter blocked LONG (sideways) | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
+                        self._macd_blocked_trades.append({
+                            'time': bar['time'],
+                            'direction': 'long',
+                            'macd': current_macd,
+                            'prev_macd': self._prev_macd,
+                            'price': current_price,
+                            'rsi': rsi,
+                            'trend': trend.value
+                        })
+                        return
                     await self._enter_long(current_price, rsi, trend)
+
         if self.config.use_trend_follow_entry and self.position_count == 0 and not self.pending_orders:
             macd = self.indicators.cache.get('macd', {}).get('macd', 0)
             rsi_rising = rsi > self.prev_rsi
@@ -319,76 +396,6 @@ class GridStrategy:
                 print(f"  🚀 Trend-follow SHORT [{reason}] | RSI: {rsi:.1f} | MACD: {macd:.2f}")
                 await self._enter_short(current_price, rsi, trend)
 
-    async def _check_entries(self, bar: Dict):
-        total_orders = self.position_count + len(self.pending_orders)
-        if total_orders >= self.config.max_positions:
-            return
-        if not self.grid_levels:
-            return
-        if self.bars_since_exit < self.config.post_exit_cooldown_bars:
-            remaining = self.config.post_exit_cooldown_bars - self.bars_since_exit
-            print(f"  ⏸️ Cooldown: {remaining} bar(s) remaining after exit")
-            return
-        trend = self.confirmed_trend
-        rsi = self.indicators.cache.get('rsi', 50)
-        open_price = bar['open']
-        high = bar['high']
-        low = bar['low']
-        current_price = bar['close']
-        active_levels = {p.grid_level for p in self.positions}
-        active_levels.update({p.grid_level for p in self.pending_orders.values()})
-        if trend in [TrendState.STRONG_BEARISH, TrendState.MODERATE_BEARISH]:
-            if rsi > self.config.entry_rsi_bearish:
-                for level in self.grid_levels:
-                    if level in active_levels:
-                        continue
-                    crossed_up = open_price < level <= high
-                    if crossed_up:
-                        await self._enter_short(level, rsi, trend)
-                        break
-        elif trend in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH]:
-            if rsi < self.config.entry_rsi_bullish:
-                for level in self.grid_levels:
-                    if level in active_levels:
-                        continue
-                    crossed_down = open_price > level >= low
-                    if crossed_down:
-                        await self._enter_long(level, rsi, trend)
-                        break
-        elif trend == TrendState.SIDEWAYS:
-            if rsi > self.config.entry_rsi_sideways_short:
-                for level in self.grid_levels:
-                    if level in active_levels or level <= current_price:
-                        continue
-                    crossed_up = open_price < level <= high
-                    if crossed_up:
-                        await self._enter_short(level, rsi, trend)
-                        break
-            elif rsi < self.config.entry_rsi_sideways_long:
-                for level in self.grid_levels:
-                    if level in active_levels or level >= current_price:
-                        continue
-                    crossed_down = open_price > level >= low
-                    if crossed_down:
-                        await self._enter_long(level, rsi, trend)
-                        break
-        if self.config.use_trend_follow_entry and self.position_count == 0 and not self.pending_orders:
-            macd = self.indicators.cache.get('macd', {}).get('macd', 0)
-            rsi_rising = rsi > self.prev_rsi
-            rsi_falling = rsi < self.prev_rsi
-            strong_long = trend == TrendState.STRONG_BULLISH
-            strong_short = trend == TrendState.STRONG_BEARISH
-            moderate_long = (self.config.trend_follow_allow_moderate and trend == TrendState.MODERATE_BULLISH and current_price > self.grid_anchor_price and rsi_rising and macd > 0)
-            moderate_short = (self.config.trend_follow_allow_moderate and trend == TrendState.MODERATE_BEARISH and current_price < self.grid_anchor_price and rsi_falling and macd < 0)
-            if (strong_long or moderate_long) and rsi < self.config.trend_follow_rsi_long:
-                reason = "strong" if strong_long else "moderate+gates"
-                print(f"  🚀 Trend-follow LONG [{reason}] | RSI: {rsi:.1f} | MACD: {macd:.2f}")
-                await self._enter_long(current_price, rsi, trend)
-            elif (strong_short or moderate_short) and rsi > self.config.trend_follow_rsi_short:
-                reason = "strong" if strong_short else "moderate+gates"
-                print(f"  🚀 Trend-follow SHORT [{reason}] | RSI: {rsi:.1f} | MACD: {macd:.2f}")
-                await self._enter_short(current_price, rsi, trend)
-    
     async def _enter_long(self, level: float, rsi: float, trend: TrendState):
         level = self._round_to_tick(level)
         size = self._calculate_position_size(level)
@@ -406,7 +413,7 @@ class GridStrategy:
         print(f"  ⬆️ LONG ORDER @ {level:.2f} | Size: {size:.2f} | SL: {stop_loss:.2f} | TP: {take_profit:.2f}{vol_note}")
         print(f"     Reason: {reason}")
         print(f"     ⏳ Order {order_id} PENDING - awaiting fill confirmation")
-    
+
     async def _enter_short(self, level: float, rsi: float, trend: TrendState):
         level = self._round_to_tick(level)
         size = self._calculate_position_size(level)
@@ -424,7 +431,7 @@ class GridStrategy:
         print(f"  ⬇️ SHORT ORDER @ {level:.2f} | Size: {size:.2f} | SL: {stop_loss:.2f} | TP: {take_profit:.2f}{vol_note}")
         print(f"     Reason: {reason}")
         print(f"     ⏳ Order {order_id} PENDING - awaiting fill confirmation")
-    
+
     async def _check_pending_orders(self):
         if not self.pending_orders:
             return
@@ -464,12 +471,8 @@ class GridStrategy:
                         stop_loss = self._round_to_tick(fill_price + self.config.stop_loss_pts)
                         take_profit = self._round_to_tick(fill_price - self.config.take_profit_pts)
 
-                # Use actual filled quantity for bracket orders
                 filled_qty = int(trade.orderStatus.filled)
 
-                # === NATIVE IB STOP-LIMIT ORDER (prevents catastrophic slippage) ===
-                # For long exits (SELL): limit = stop - offset (floor on how bad fill can be)
-                # For short exits (BUY): limit = stop + offset (ceiling on how bad fill can be)
                 stop_action = 'SELL' if pending.side == 'long' else 'BUY'
                 offset = self.config.stop_limit_offset_pts
                 if pending.side == 'long':
@@ -478,16 +481,15 @@ class GridStrategy:
                     stop_limit_price = self._round_to_tick(stop_loss + offset)
                 stop_trade = await self.broker.place_stop_limit_order(stop_action, filled_qty, stop_loss, stop_limit_price)
                 stop_order_id = stop_trade.order.orderId if stop_trade else None
-                
-                # === NATIVE IB TAKE PROFIT ORDER ===
+
                 tp_action = 'SELL' if pending.side == 'long' else 'BUY'
                 tp_trade = await self.broker.place_limit_order(tp_action, filled_qty, take_profit)
                 tp_order_id = tp_trade.order.orderId if tp_trade else None
-                
+
                 position = Position(
                     side=pending.side,
                     entry_price=fill_price,
-                    size=float(filled_qty),  # Store actual filled qty for P&L calculations
+                    size=float(filled_qty),
                     stop_loss=stop_loss,
                     take_profit=take_profit,
                     trailing_stop=None,
@@ -518,9 +520,8 @@ class GridStrategy:
                     except:
                         pass
                     del self.pending_orders[order_id]
-    
+
     def _weighted_avg_fill(self, fills, fallback: float) -> float:
-        """Returns weighted average fill price across all fills."""
         if not fills:
             return fallback
         total_qty = sum(f.execution.shares for f in fills)
@@ -550,7 +551,6 @@ class GridStrategy:
                 order_to_cancel = position.stop_order_id
                 del self.broker._filled_orders[position.tp_order_id]
             if exit_price:
-                # Cancel the other bracket order (code-side cancel as safety net)
                 if order_to_cancel:
                     await self.broker.cancel_order_by_id(order_to_cancel)
                 if position.side == 'long':
@@ -643,14 +643,14 @@ class GridStrategy:
                 self.positions.remove(position)
                 self.position_count = max(0, self.position_count - 1)
                 self.bars_since_exit = 0
-    
+
     def _should_exit_on_trend_reversal(self, position: Position) -> bool:
         trend = self.confirmed_trend
         if position.side == 'long':
             return trend in [TrendState.STRONG_BEARISH, TrendState.MODERATE_BEARISH]
         else:
             return trend in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH]
-    
+
     async def _close_position(self, position: Position, trigger_price: float, reason: str):
         action = 'SELL' if position.side == 'long' else 'BUY'
         trade = await self.broker.place_market_order(action, 1)
@@ -671,11 +671,25 @@ class GridStrategy:
         self.bars_since_exit = 0
         print(f"  ❌ CLOSE {position.side.upper()} @ {actual_exit:.2f} (trigger: {trigger_price:.2f}) | P&L: ${pnl:+,.2f} | {reason}")
         print(f"     Daily P&L: ${self.daily_pnl:+,.2f} | Equity: ${self.equity:,.2f}")
-    
+
     def _check_daily_loss_limit(self) -> bool:
         max_loss = self.config.initial_equity * (self.config.max_loss_per_day_pct / 100)
         return self.daily_pnl <= -max_loss
-    
+
+    def print_macd_filter_summary(self):
+        """Call this at end of session to see every trade the MACD filter blocked."""
+        print(f"\n{'='*60}")
+        print(f"🔍 MACD FILTER SUMMARY — {len(self._macd_blocked_trades)} trade(s) blocked")
+        print(f"{'='*60}")
+        if not self._macd_blocked_trades:
+            print("  No trades blocked today.")
+        for t in self._macd_blocked_trades:
+            ct = t['time'].astimezone(CENTRAL)
+            print(f"  {ct.strftime('%H:%M')} | {t['direction'].upper()} @ {t['price']:.2f} | "
+                  f"MACD: {t['macd']:.2f} vs prev {t['prev_macd']:.2f} | "
+                  f"RSI: {t['rsi']:.1f} | Trend: {t['trend']}")
+        print(f"{'='*60}\n")
+
     async def on_new_bar(self, bar: Dict):
         self.bars.append(bar)
         self.last_price = bar['close']
@@ -703,6 +717,10 @@ class GridStrategy:
             return
         self.previous_trend = self.confirmed_trend
         self.prev_rsi = self.indicators.cache.get('rsi', 50)
+
+        # Snapshot current bar's MACD — becomes "previous" on the next bar
+        self._prev_macd = self.indicators.cache.get('macd', {}).get('macd', 0.0)
+
         self.bars_since_exit += 1
         self.current_trend = self._determine_trend()
         self._get_confirmed_trend()
@@ -721,32 +739,20 @@ class GridStrategy:
                 self._5m_bar_buffer = []
                 if self.indicators_5m.calculate_all(self.bars_5m):
                     self.current_trend_5m = self._determine_trend_5m()
-        if self.config.use_grid_entry:
-            if self.grid_levels and self.grid_anchor_price:
-                await self._check_entries(bar)
-            if self._should_reset_grid_anchor() or self.grid_anchor_price is None:
-                self._set_grid_anchor()
-            self.grid_levels = self._calculate_grid_levels()
         grid_size = self._calculate_grid_size()
         ind = self.indicators.cache
         trend_display = f"{self.confirmed_trend.value}"
         if self.current_trend != self.confirmed_trend:
             trend_display += f" (raw: {self.current_trend.value})"
-        if self.config.use_grid_entry:
-            print(f"  📈 Trend: {trend_display} | Grid: {grid_size:.3f}%")
+        if len(self.bars) >= 2:
+            prev = self.bars[-2]
+            print(f"  📈 Trend: {trend_display}")
+            print(f"  🗺️  Grid: {grid_size:.3f}% | 🔺 {prev['high']:.2f} 🔻 {prev['low']:.2f}")
+        print(f"  📡 RSI: {ind['rsi']:.1f} | MACD: {ind['macd']['macd']:.2f} (prev: {self._prev_macd:.2f}) | ATR: {ind['atr']:.2f}")
+        if self.config.use_5m_filter:
+            print(f"  📊 Filled: {self.position_count} | Pending: {len(self.pending_orders)} | 5m: {self.current_trend_5m.value}")
         else:
-            if len(self.bars) >= 2:
-                prev = self.bars[-2]
-                print(f"  📈 Trend: {trend_display}")
-                print(f"  🗺️  Grid: {grid_size:.3f}% | 🔺 {prev['high']:.2f} 🔻 {prev['low']:.2f}")
-        print(f"  📡 RSI: {ind['rsi']:.1f} | MACD: {ind['macd']['macd']:.2f} | ATR: {ind['atr']:.2f}")
-        if self.config.use_grid_entry:
-            print(f"  ⚓ Anchor: {self.grid_anchor_price:.2f} | Filled: {self.position_count} | Pending: {len(self.pending_orders)}")
-        else:
-            if self.config.use_5m_filter:
-                print(f"  📊 Filled: {self.position_count} | Pending: {len(self.pending_orders)} | 5m: {self.current_trend_5m.value}")
-            else:
-                print(f"  📊 Filled: {self.position_count} | Pending: {len(self.pending_orders)}")
+            print(f"  📊 Filled: {self.position_count} | Pending: {len(self.pending_orders)}")
         for order_id, pending in self.pending_orders.items():
             age_sec = (datetime.now(UTC) - pending.submit_time).total_seconds()
             print(f"     ⏳ PENDING {pending.side.upper()} @ {pending.limit_price:.2f} (order {order_id}, {age_sec:.0f}s)")
@@ -778,17 +784,5 @@ class GridStrategy:
                 await self._close_position(position, bar['close'], "Max Daily Loss")
             return
         await self._check_exits(bar)
-        if self.config.use_grid_entry:
-            if self.grid_levels and self.grid_anchor_price:
-                await self._check_entries(bar)
-        else:
-            await self._check_entries_scalp(bar)
-        if self.config.use_grid_entry and self.grid_levels:
-            above = [f"{l:.2f}" for l in self.grid_levels if l > self.last_price][:3]
-            below = [f"{l:.2f}" for l in sorted(self.grid_levels, reverse=True) if l < self.last_price][:3]
-            if self.confirmed_trend == TrendState.SIDEWAYS:
-                print(f"  🧮 Grid ↑: {above}")
-                print(f"  🧮 Grid ↓: {below}")
-            else:
-                print(f"  🧮 Grid ↑: {above}  Grid ↓: {below}")
+        await self._check_entries_scalp(bar)
         print(f"  💰 Daily P&L: ${self.daily_pnl:+,.2f}")
