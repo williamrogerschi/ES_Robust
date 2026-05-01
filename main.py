@@ -8,44 +8,13 @@ from models import CONFIG_PRESETS
 from broker import IBKRBroker
 
 # =============================================================================
-# SELECT MODE: "scalp" | "scalp_robust" | "grid"
-# =============================================================================
-MODE = "scalp"
+# ES ROBUST BOT — client ID 11
+# Runs independently alongside the ES scalp bot (client ID 10)
+# Scalp robust mode: MACD filter + 5m trend filter + session low short filter
+# Session: 8:30 AM - 11:00 AM CT only
 # =============================================================================
 
-MODE_DESCRIPTIONS = {
-    "scalp": {
-        "label": "📈 MODE: SCALP",
-        "notes": [
-            "• {contracts} contract(s) max",
-            "• Grid entries only",
-            "• Trailing stop enabled",
-            "• SL: ~8 pts | TP: ~12 pts | Trail activates: +6 pts",
-            "• Best for: Normal sessions, choppy/ranging opens",
-        ]
-    },
-    "scalp_robust": {
-        "label": "🛡️  MODE: SCALP ROBUST",
-        "notes": [
-            "• {contracts} contract(s) max",
-            "• Scalp core logic + session filter + 5m trend alignment",
-            "• Trailing stop enabled",
-            "• SL: ~8 pts | TP: ~12 pts | Trail activates: +6 pts",
-            "• Session: 9:30-12:00 CT only",
-            "• 5m trend must align with 1m direction",
-            "• Best for: High-quality morning session trades",
-        ]
-    },
-    "grid": {
-        "label": "📊 MODE: GRID",
-        "notes": [
-            "• {contracts} contract(s) max",
-            "• No trailing stop",
-            "• SL: ~28 pts | TP: ~17 pts",
-            "• Best for: Ranging markets, mean reversion",
-        ]
-    },
-}
+CLIENT_ID = 11
 
 
 class DualWriter:
@@ -64,19 +33,17 @@ class DualWriter:
 
 
 def setup_logging():
-    log_filename = f"es_bot_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    log_filename = f"es_robust_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
 
     fmt = logging.Formatter(
         '%(asctime)s | %(levelname)-8s | %(message)s',
         datefmt='%Y-%m-%d %H:%M:%S'
     )
 
-    # File handler - INFO and above only (no raw socket noise)
     fh = logging.FileHandler(log_filename, mode='w', encoding='utf-8')
     fh.setLevel(logging.INFO)
     fh.setFormatter(fmt)
 
-    # Console handler - WARNING and above (clean terminal)
     ch = logging.StreamHandler()
     ch.setLevel(logging.WARNING)
     ch.setFormatter(fmt)
@@ -87,10 +54,8 @@ def setup_logging():
     root.addHandler(fh)
     root.addHandler(ch)
 
-    # Suppress ib_insync raw socket debug in both handlers
     logging.getLogger('ib_insync').setLevel(logging.WARNING)
 
-    # Redirect print() to also write to log file
     log_file_handle = open(log_filename, 'a', encoding='utf-8')
     sys.stdout = DualWriter(sys.stdout, log_file_handle)
 
@@ -101,21 +66,23 @@ def setup_logging():
 async def main():
     log_file = setup_logging()
 
-    if MODE not in CONFIG_PRESETS:
-        raise ValueError(f"Unknown MODE: '{MODE}'. Valid options: {list(CONFIG_PRESETS.keys())}")
-
-    config = CONFIG_PRESETS[MODE]()
+    config = CONFIG_PRESETS['scalp_robust']()
     broker = IBKRBroker(symbol="ES")
 
-    desc = MODE_DESCRIPTIONS[MODE]
     print("\n" + "="*60)
-    print(desc["label"])
-    for note in desc["notes"]:
-        print(f"   {note.format(contracts=config.contracts_per_trade)}")
+    print("🛡️  ES ROBUST BOT — SCALP ROBUST MODE")
+    print(f"   • {config.contracts_per_trade} contract(s) max")
+    print(f"   • MACD momentum filter")
+    print(f"   • 5m trend alignment filter")
+    print(f"   • Session low short filter")
+    print(f"   • Trailing stop enabled")
+    print(f"   • SL: ~8 pts | TP: ~12 pts | Trail activates: +6 pts")
+    print(f"   • Session: 8:30–11:00 CT only")
+    print(f"   • Client ID: {CLIENT_ID}")
     print("="*60)
 
     try:
-        await broker.connect_async(host="127.0.0.1", port=7497, client_id=10)
+        await broker.connect_async(host="127.0.0.1", port=7497, client_id=CLIENT_ID)
         await broker.get_front_month_contract_async()
 
         strategy = GridStrategy(broker=broker, config=config)
@@ -140,7 +107,7 @@ async def main():
 
             if strategy.indicators.calculate_all(strategy.bars):
                 strategy.current_trend = strategy._determine_trend()
-                strategy.grid_levels = strategy._calculate_grid_levels()
+                strategy._prev_macd = strategy.indicators.cache.get('macd', {}).get('macd', 0.0)
 
                 ind = strategy.indicators.cache
                 print(f"\nIndicators ready!")
@@ -167,7 +134,7 @@ async def main():
 
         print("\n" + "="*60)
         print("Starting live 1-minute bar stream...")
-        print(f"Strategy is now ACTIVE ({MODE.upper()} mode)")
+        print(f"Strategy is now ACTIVE (client ID: {CLIENT_ID})")
         print("="*60 + "\n")
 
         async for bar in broker.stream_1m_bars():
@@ -179,12 +146,13 @@ async def main():
         print("="*60)
 
         if 'strategy' in locals():
-            print(f"\nFinal Summary ({MODE.upper()} mode):")
+            print(f"\nFinal Summary (ES ROBUST):")
             print(f"  Daily P&L: ${strategy.daily_pnl:+,.2f}")
             print(f"  Open Positions: {strategy.position_count}")
             print(f"  Contracts per trade: {config.contracts_per_trade}")
             print(f"  Equity: ${strategy.equity:,.2f}")
             print(f"\n  Log saved to: {log_file}")
+            strategy.print_macd_filter_summary()
 
     except Exception as e:
         print(f"\nError: {e}")
