@@ -249,7 +249,7 @@ def get_scalp_robust_config() -> StrategyConfig:
         contracts_per_trade=10,
         atr_high_volatility_threshold=4.5,
         contracts_per_trade_high_vol=5,
-        use_session_filter=True,
+        use_session_filter=False,
         session_start_hour=8,
         session_start_minute=30,
         session_end_hour=12,
