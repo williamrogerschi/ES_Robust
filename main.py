@@ -77,7 +77,7 @@ async def main():
     print(f"   • Session low short filter")
     print(f"   • Trailing stop enabled")
     print(f"   • SL: ~8 pts | TP: ~12 pts | Trail activates: +6 pts")
-    print(f"   • Session: 8:30–11:00 CT only")
+    print(f"   • Session: 8:30–12:00 CT only")
     print(f"   • Client ID: {CLIENT_ID}")
     print("="*60)
 

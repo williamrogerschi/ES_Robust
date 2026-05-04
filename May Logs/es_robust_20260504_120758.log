@@ -1,0 +1,2074 @@
+Logging to: es_robust_20260504_120758.log
+
+============================================================
+🛡️  ES ROBUST BOT — SCALP ROBUST MODE
+   • 10 contract(s) max
+   • MACD momentum filter
+   • 5m trend alignment filter
+   • Session low short filter
+   • Trailing stop enabled
+   • SL: ~8 pts | TP: ~12 pts | Trail activates: +6 pts
+   • Session: 8:30–11:00 CT only
+   • Client ID: 11
+============================================================
+✓ Connected to IBKR (paper) - clientId=11
+✓ Front-month contract: ESM6 expiry=20260618
+
+============================================================
+Loading historical data for indicator warm-up...
+============================================================
+→ Fetching historical bars (1 D, 1 min)...
+✓ Loaded 1088 historical bars
+
+Processing 1088 historical bars...
+
+Indicators ready!
+  Bars loaded: 1088
+  Last price: 7209.25
+  Trend: strong_bearish
+  RSI: 21.3
+  ATR: 4.79
+  MACD: -3.65 / Signal: -2.66
+  MA: 7223.94 / 7227.95 / 7249.27
+
+------------------------------------------------------------
+Account Value: $1,053,953.13
+Buying Power: $4,202,345.25
+Current Position: 0 contracts
+------------------------------------------------------------
+
+============================================================
+Starting live 1-minute bar stream...
+Strategy is now ACTIVE (client ID: 11)
+============================================================
+
+→ Subscribed to 5-second real-time bars (aggregating to 1 min)
+
+[2026-05-04 11:07] O:7209.25 H:7211.25 L:7208.25 C:7208.50 V:2195.0
+  📈 Trend: sideways (raw: strong_bearish)
+  🗺️  Grid: 0.080% | 🔺 7221.50 🔻 7208.50
+  📡 RSI: 14.9 | MACD: -4.38 (prev: -3.65) | ATR: 4.73
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:08] O:7208.75 H:7210.00 L:7199.50 C:7207.00 V:18998.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.086% | 🔺 7211.25 🔻 7208.25
+  📡 RSI: 14.6 | MACD: -5.02 (prev: -4.38) | ATR: 5.16
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:09] O:7207.00 H:7210.50 L:7203.25 C:7210.00 V:7370.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.091% | 🔺 7210.00 🔻 7199.50
+  📡 RSI: 22.2 | MACD: -5.22 (prev: -5.02) | ATR: 5.46
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:10] O:7210.00 H:7210.00 L:7204.25 C:7207.25 V:6493.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.092% | 🔺 7210.50 🔻 7203.25
+  📡 RSI: 22.1 | MACD: -5.54 (prev: -5.22) | ATR: 5.52
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:11] O:7207.00 H:7213.50 L:7206.50 C:7213.50 V:4686.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.097% | 🔺 7210.00 🔻 7204.25
+  📡 RSI: 30.7 | MACD: -5.23 (prev: -5.54) | ATR: 5.80
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:12] O:7213.50 H:7215.25 L:7211.50 C:7214.50 V:3741.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.094% | 🔺 7213.50 🔻 7206.50
+  📡 RSI: 35.2 | MACD: -4.85 (prev: -5.23) | ATR: 5.62
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:13] O:7214.75 H:7214.75 L:7210.25 C:7212.00 V:2888.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.095% | 🔺 7215.25 🔻 7211.50
+  📡 RSI: 30.7 | MACD: -4.69 (prev: -4.85) | ATR: 5.71
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:14] O:7212.00 H:7212.25 L:7208.50 C:7208.50 V:2793.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.092% | 🔺 7214.75 🔻 7210.25
+  📡 RSI: 31.5 | MACD: -4.80 (prev: -4.69) | ATR: 5.50
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:15] O:7208.75 H:7210.50 L:7206.75 C:7207.50 V:3664.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.090% | 🔺 7212.25 🔻 7208.50
+  📡 RSI: 30.2 | MACD: -4.90 (prev: -4.80) | ATR: 5.43
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:16] O:7207.50 H:7213.00 L:7204.00 C:7210.00 V:6475.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.098% | 🔺 7210.50 🔻 7206.75
+  📡 RSI: 35.9 | MACD: -4.73 (prev: -4.90) | ATR: 5.91
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:17] O:7210.50 H:7218.25 L:7209.00 C:7213.25 V:9060.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.107% | 🔺 7213.00 🔻 7204.00
+  📡 RSI: 39.5 | MACD: -4.28 (prev: -4.73) | ATR: 6.41
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:18] O:7213.50 H:7219.75 L:7213.25 C:7219.25 V:4992.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.107% | 🔺 7218.25 🔻 7209.00
+  📡 RSI: 48.4 | MACD: -3.40 (prev: -4.28) | ATR: 6.45
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:19] O:7219.25 H:7225.50 L:7217.50 C:7221.25 V:8749.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.113% | 🔺 7219.75 🔻 7213.25
+  📡 RSI: 52.2 | MACD: -2.52 (prev: -3.40) | ATR: 6.79
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:20] O:7221.25 H:7223.00 L:7219.50 C:7222.75 V:4287.0
+  📈 Trend: strong_bearish (raw: moderate_bearish)
+  🗺️  Grid: 0.101% | 🔺 7225.50 🔻 7217.50
+  📡 RSI: 68.0 | MACD: -1.67 (prev: -2.52) | ATR: 6.11
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:21] O:7222.75 H:7226.50 L:7222.25 C:7223.50 V:5393.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.103% | 🔺 7223.00 🔻 7219.50
+  📡 RSI: 70.0 | MACD: -0.94 (prev: -1.67) | ATR: 6.20
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:22] O:7223.50 H:7227.75 L:7223.50 C:7225.75 V:5948.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.095% | 🔺 7226.50 🔻 7222.25
+  📡 RSI: 74.5 | MACD: -0.17 (prev: -0.94) | ATR: 5.75
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:23] O:7225.75 H:7228.25 L:7223.00 C:7224.50 V:3098.0
+  📈 Trend: moderate_bearish (raw: moderate_bullish)
+  🗺️  Grid: 0.093% | 🔺 7227.75 🔻 7223.50
+  📡 RSI: 69.9 | MACD: 0.34 (prev: -0.17) | ATR: 5.61
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:24] O:7224.75 H:7226.25 L:7222.75 C:7224.00 V:2528.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.090% | 🔺 7228.25 🔻 7223.00
+  📡 RSI: 74.5 | MACD: 0.69 (prev: 0.34) | ATR: 5.45
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:25] O:7223.75 H:7226.75 L:7223.50 C:7224.25 V:1937.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.086% | 🔺 7226.25 🔻 7222.75
+  📡 RSI: 69.0 | MACD: 0.98 (prev: 0.69) | ATR: 5.18
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:26] O:7224.50 H:7227.75 L:7223.75 C:7224.75 V:3519.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.086% | 🔺 7226.75 🔻 7223.50
+  📡 RSI: 68.5 | MACD: 1.23 (prev: 0.98) | ATR: 5.20
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:27] O:7224.75 H:7224.75 L:7219.50 C:7220.00 V:4114.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.087% | 🔺 7227.75 🔻 7223.75
+  📡 RSI: 63.3 | MACD: 1.04 (prev: 1.23) | ATR: 5.25
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:28] O:7219.75 H:7220.50 L:7218.00 C:7219.75 V:2694.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.086% | 🔺 7224.75 🔻 7219.50
+  📡 RSI: 71.0 | MACD: 0.86 (prev: 1.04) | ATR: 5.16
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:29] O:7219.75 H:7221.50 L:7219.25 C:7219.25 V:1977.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.084% | 🔺 7220.50 🔻 7218.00
+  📡 RSI: 72.4 | MACD: 0.66 (prev: 0.86) | ATR: 5.05
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:30] O:7219.50 H:7222.75 L:7217.75 C:7222.50 V:3796.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7221.50 🔻 7219.25
+  📡 RSI: 73.1 | MACD: 0.76 (prev: 0.66) | ATR: 4.77
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:31] O:7222.50 H:7224.25 L:7221.75 C:7223.00 V:2412.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7222.75 🔻 7217.75
+  📡 RSI: 70.1 | MACD: 0.87 (prev: 0.76) | ATR: 4.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:32] O:7223.00 H:7223.50 L:7220.25 C:7220.50 V:1489.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7224.25 🔻 7221.75
+  📡 RSI: 53.0 | MACD: 0.75 (prev: 0.87) | ATR: 4.05
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:33] O:7220.75 H:7224.00 L:7220.00 C:7223.25 V:1644.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7223.50 🔻 7220.25
+  📡 RSI: 54.7 | MACD: 0.86 (prev: 0.75) | ATR: 3.77
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:34] O:7223.25 H:7226.25 L:7223.00 C:7225.25 V:3541.0
+  📈 Trend: moderate_bullish (raw: strong_bullish)
+  🗺️  Grid: 0.080% | 🔺 7224.00 🔻 7220.00
+  📡 RSI: 55.7 | MACD: 1.10 (prev: 0.86) | ATR: 3.75
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:35] O:7225.00 H:7225.75 L:7221.50 C:7221.50 V:1900.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7226.25 🔻 7223.00
+  📡 RSI: 46.0 | MACD: 0.98 (prev: 1.10) | ATR: 3.75
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:36] O:7221.75 H:7223.75 L:7221.00 C:7223.25 V:1509.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7225.75 🔻 7221.50
+  📡 RSI: 44.9 | MACD: 1.01 (prev: 0.98) | ATR: 3.64
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:37] O:7223.00 H:7223.50 L:7218.75 C:7221.75 V:2318.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7223.75 🔻 7221.00
+  📡 RSI: 44.4 | MACD: 0.90 (prev: 1.01) | ATR: 3.61
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:38] O:7221.75 H:7222.00 L:7215.50 C:7220.75 V:6706.0
+  📈 Trend: strong_bullish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7223.50 🔻 7218.75
+  📡 RSI: 43.6 | MACD: 0.73 (prev: 0.90) | ATR: 3.82
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:39] O:7221.00 H:7221.00 L:7217.50 C:7217.75 V:1630.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7222.00 🔻 7215.50
+  📡 RSI: 38.4 | MACD: 0.34 (prev: 0.73) | ATR: 3.84
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:40] O:7218.00 H:7222.50 L:7217.75 C:7219.50 V:1656.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7221.00 🔻 7217.50
+  📡 RSI: 41.0 | MACD: 0.18 (prev: 0.34) | ATR: 3.89
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:41] O:7219.75 H:7220.25 L:7217.50 C:7220.00 V:1616.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7222.50 🔻 7217.75
+  📡 RSI: 50.0 | MACD: 0.09 (prev: 0.18) | ATR: 3.71
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:42] O:7220.00 H:7221.50 L:7218.25 C:7219.25 V:2200.0
+  📈 Trend: moderate_bearish (raw: strong_bearish)
+  🗺️  Grid: 0.080% | 🔺 7220.25 🔻 7217.50
+  📡 RSI: 49.0 | MACD: -0.04 (prev: 0.09) | ATR: 3.77
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:43] O:7219.25 H:7222.75 L:7219.00 C:7222.25 V:1847.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7221.50 🔻 7218.25
+  📡 RSI: 55.4 | MACD: 0.09 (prev: -0.04) | ATR: 3.88
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:44] O:7222.50 H:7222.50 L:7218.25 C:7218.25 V:1866.0
+  📈 Trend: moderate_bearish (raw: strong_bearish)
+  🗺️  Grid: 0.080% | 🔺 7222.75 🔻 7219.00
+  📡 RSI: 42.6 | MACD: -0.12 (prev: 0.09) | ATR: 3.82
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:45] O:7218.50 H:7220.00 L:7217.25 C:7219.75 V:1851.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7222.50 🔻 7218.25
+  📡 RSI: 44.5 | MACD: -0.17 (prev: -0.12) | ATR: 3.84
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:46] O:7220.00 H:7220.50 L:7216.50 C:7217.75 V:1453.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7220.00 🔻 7217.25
+  📡 RSI: 45.3 | MACD: -0.36 (prev: -0.17) | ATR: 3.89
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:47] O:7217.50 H:7218.25 L:7216.00 C:7217.50 V:1784.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7220.50 🔻 7216.50
+  📡 RSI: 39.3 | MACD: -0.53 (prev: -0.36) | ATR: 3.77
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:48] O:7217.75 H:7219.00 L:7216.75 C:7217.00 V:1595.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7218.25 🔻 7216.00
+  📡 RSI: 33.7 | MACD: -0.70 (prev: -0.53) | ATR: 3.70
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:49] O:7217.25 H:7218.75 L:7216.25 C:7218.75 V:1766.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7219.00 🔻 7216.75
+  📡 RSI: 44.1 | MACD: -0.68 (prev: -0.70) | ATR: 3.57
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:50] O:7218.50 H:7219.50 L:7215.50 C:7217.75 V:2324.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7218.75 🔻 7216.25
+  📡 RSI: 37.8 | MACD: -0.74 (prev: -0.68) | ATR: 3.66
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:51] O:7218.00 H:7218.00 L:7213.50 C:7216.00 V:3048.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7219.50 🔻 7215.50
+  📡 RSI: 37.4 | MACD: -0.91 (prev: -0.74) | ATR: 3.64
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:52] O:7216.00 H:7217.00 L:7212.75 C:7216.00 V:4218.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7218.00 🔻 7213.50
+  📡 RSI: 39.1 | MACD: -1.04 (prev: -0.91) | ATR: 3.48
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:53] O:7215.75 H:7217.50 L:7214.00 C:7214.75 V:2437.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7217.00 🔻 7212.75
+  📡 RSI: 42.5 | MACD: -1.23 (prev: -1.04) | ATR: 3.48
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:54] O:7214.75 H:7216.00 L:7214.25 C:7216.00 V:1697.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7217.50 🔻 7214.00
+  📡 RSI: 41.0 | MACD: -1.26 (prev: -1.23) | ATR: 3.27
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:55] O:7216.00 H:7218.50 L:7214.75 C:7216.00 V:2042.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7216.00 🔻 7214.25
+  📡 RSI: 39.5 | MACD: -1.27 (prev: -1.26) | ATR: 3.34
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:56] O:7216.00 H:7216.75 L:7214.50 C:7215.50 V:1493.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7218.50 🔻 7214.75
+  📡 RSI: 40.0 | MACD: -1.31 (prev: -1.27) | ATR: 3.27
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:57] O:7215.50 H:7216.25 L:7214.25 C:7215.50 V:2216.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7216.75 🔻 7214.50
+  📡 RSI: 28.6 | MACD: -1.32 (prev: -1.31) | ATR: 3.14
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:58] O:7215.50 H:7215.75 L:7214.00 C:7214.50 V:1189.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7216.25 🔻 7214.25
+  📡 RSI: 35.3 | MACD: -1.40 (prev: -1.32) | ATR: 2.96
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 11:59] O:7214.25 H:7216.25 L:7214.25 C:7215.00 V:1406.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7215.75 🔻 7214.00
+  📡 RSI: 29.8 | MACD: -1.40 (prev: -1.40) | ATR: 2.91
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:00] O:7214.75 H:7217.75 L:7214.25 C:7216.50 V:2607.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7216.25 🔻 7214.25
+  📡 RSI: 44.4 | MACD: -1.26 (prev: -1.40) | ATR: 2.88
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:00 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:01] O:7216.50 H:7221.00 L:7214.50 C:7218.75 V:6346.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7217.75 🔻 7214.25
+  📡 RSI: 54.7 | MACD: -0.97 (prev: -1.26) | ATR: 3.18
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:01 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:02] O:7218.50 H:7220.75 L:7216.50 C:7218.75 V:2537.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7221.00 🔻 7214.50
+  📡 RSI: 56.9 | MACD: -0.72 (prev: -0.97) | ATR: 3.32
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:02 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:03] O:7218.75 H:7221.75 L:7218.25 C:7219.50 V:2487.0
+  📈 Trend: strong_bearish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7220.75 🔻 7216.50
+  📡 RSI: 53.2 | MACD: -0.46 (prev: -0.72) | ATR: 3.39
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:03 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:04] O:7219.25 H:7222.00 L:7218.25 C:7220.25 V:1836.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7221.75 🔻 7218.25
+  📡 RSI: 60.9 | MACD: -0.19 (prev: -0.46) | ATR: 3.38
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:04 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:05] O:7220.25 H:7223.00 L:7219.50 C:7221.50 V:2520.0
+  📈 Trend: moderate_bearish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7222.00 🔻 7218.25
+  📡 RSI: 75.0 | MACD: 0.12 (prev: -0.19) | ATR: 3.30
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:05 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:06] O:7221.75 H:7224.75 L:7221.50 C:7222.25 V:3513.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7223.00 🔻 7219.50
+  📡 RSI: 76.6 | MACD: 0.42 (prev: 0.12) | ATR: 3.23
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:06 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:07] O:7222.25 H:7224.75 L:7222.25 C:7223.25 V:2253.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7224.75 🔻 7221.50
+  📡 RSI: 87.0 | MACD: 0.74 (prev: 0.42) | ATR: 3.16
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:07 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:08] O:7223.25 H:7224.75 L:7221.25 C:7222.00 V:1574.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7224.75 🔻 7222.25
+  📡 RSI: 76.1 | MACD: 0.87 (prev: 0.74) | ATR: 3.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:08 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:09] O:7222.25 H:7224.00 L:7221.00 C:7224.00 V:1468.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7224.75 🔻 7221.25
+  📡 RSI: 79.6 | MACD: 1.13 (prev: 0.87) | ATR: 3.23
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:09 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:10] O:7224.00 H:7225.25 L:7223.50 C:7225.00 V:1486.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7224.00 🔻 7221.00
+  📡 RSI: 83.9 | MACD: 1.40 (prev: 1.13) | ATR: 3.20
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:10 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:11] O:7225.00 H:7226.25 L:7222.50 C:7223.25 V:1786.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7225.25 🔻 7223.50
+  📡 RSI: 74.6 | MACD: 1.45 (prev: 1.40) | ATR: 3.32
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:11 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:12] O:7223.50 H:7224.00 L:7222.50 C:7222.75 V:1166.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7226.25 🔻 7222.50
+  📡 RSI: 77.0 | MACD: 1.44 (prev: 1.45) | ATR: 3.30
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:12 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:13] O:7222.50 H:7224.25 L:7221.00 C:7223.50 V:1664.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7224.00 🔻 7222.50
+  📡 RSI: 77.4 | MACD: 1.47 (prev: 1.44) | ATR: 3.39
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:13 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:14] O:7223.50 H:7225.00 L:7223.25 C:7224.00 V:1158.0
+  📈 Trend: moderate_bullish (raw: strong_bullish)
+  🗺️  Grid: 0.080% | 🔺 7224.25 🔻 7221.00
+  📡 RSI: 75.9 | MACD: 1.52 (prev: 1.47) | ATR: 3.27
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:14 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:15] O:7224.00 H:7224.25 L:7223.00 C:7223.50 V:1676.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7225.00 🔻 7223.25
+  📡 RSI: 68.6 | MACD: 1.50 (prev: 1.52) | ATR: 2.89
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:15 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:16] O:7223.50 H:7224.25 L:7222.75 C:7224.25 V:1165.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7224.25 🔻 7223.00
+  📡 RSI: 70.4 | MACD: 1.53 (prev: 1.50) | ATR: 2.70
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:16 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:17] O:7224.25 H:7232.75 L:7222.00 C:7228.75 V:11520.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7224.25 🔻 7222.75
+  📡 RSI: 76.8 | MACD: 1.89 (prev: 1.53) | ATR: 3.21
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:17 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:18] O:7229.00 H:7235.00 L:7228.75 C:7232.00 V:4562.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7232.75 🔻 7222.00
+  📡 RSI: 79.7 | MACD: 2.41 (prev: 1.89) | ATR: 3.39
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:18 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:19] O:7232.00 H:7234.25 L:7231.25 C:7232.50 V:2583.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.00 🔻 7228.75
+  📡 RSI: 78.9 | MACD: 2.84 (prev: 2.41) | ATR: 3.36
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:19 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:20] O:7232.50 H:7234.75 L:7231.00 C:7231.50 V:2457.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7234.25 🔻 7231.25
+  📡 RSI: 74.0 | MACD: 3.05 (prev: 2.84) | ATR: 3.39
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:20 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:21] O:7231.50 H:7233.75 L:7230.75 C:7233.75 V:1471.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7234.75 🔻 7231.00
+  📡 RSI: 75.6 | MACD: 3.37 (prev: 3.05) | ATR: 3.43
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:21 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:22] O:7233.75 H:7234.75 L:7232.75 C:7233.25 V:1542.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7233.75 🔻 7230.75
+  📡 RSI: 78.5 | MACD: 3.54 (prev: 3.37) | ATR: 3.32
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:22 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:23] O:7233.50 H:7235.75 L:7233.25 C:7235.00 V:2054.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7234.75 🔻 7232.75
+  📡 RSI: 78.2 | MACD: 3.77 (prev: 3.54) | ATR: 3.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:23 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:24] O:7235.00 H:7236.25 L:7233.75 C:7234.50 V:2136.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.75 🔻 7233.25
+  📡 RSI: 75.0 | MACD: 3.87 (prev: 3.77) | ATR: 3.34
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:24 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:25] O:7234.75 H:7235.25 L:7233.25 C:7233.50 V:1355.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7236.25 🔻 7233.75
+  📡 RSI: 78.1 | MACD: 3.82 (prev: 3.87) | ATR: 3.21
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:25 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:26] O:7233.25 H:7234.00 L:7231.50 C:7232.00 V:1887.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.25 🔻 7233.25
+  📡 RSI: 74.0 | MACD: 3.62 (prev: 3.82) | ATR: 3.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:26 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:27] O:7232.25 H:7235.00 L:7231.50 C:7234.75 V:1610.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7234.00 🔻 7231.50
+  📡 RSI: 76.5 | MACD: 3.64 (prev: 3.62) | ATR: 3.30
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:27 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:28] O:7234.75 H:7235.50 L:7234.00 C:7235.25 V:1186.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.00 🔻 7231.50
+  📡 RSI: 76.5 | MACD: 3.66 (prev: 3.64) | ATR: 3.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:28 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:29] O:7235.50 H:7235.75 L:7234.25 C:7235.25 V:1772.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.50 🔻 7234.00
+  📡 RSI: 78.3 | MACD: 3.63 (prev: 3.66) | ATR: 3.30
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:29 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:30] O:7235.50 H:7235.50 L:7233.75 C:7234.75 V:2004.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.75 🔻 7234.25
+  📡 RSI: 75.6 | MACD: 3.53 (prev: 3.63) | ATR: 3.32
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:30 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:31] O:7235.00 H:7235.50 L:7234.50 C:7235.25 V:1231.0
+  📈 Trend: strong_bullish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7235.50 🔻 7233.75
+  📡 RSI: 69.7 | MACD: 3.44 (prev: 3.53) | ATR: 2.62
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:31 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:32] O:7235.00 H:7235.75 L:7234.25 C:7234.25 V:1041.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.50 🔻 7234.50
+  📡 RSI: 57.9 | MACD: 3.26 (prev: 3.44) | ATR: 2.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:32 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:33] O:7234.25 H:7235.50 L:7232.75 C:7233.50 V:1175.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.75 🔻 7234.25
+  📡 RSI: 53.4 | MACD: 3.02 (prev: 3.26) | ATR: 2.27
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:33 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:34] O:7233.25 H:7233.75 L:7230.50 C:7230.75 V:2626.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.50 🔻 7232.75
+  📡 RSI: 47.7 | MACD: 2.58 (prev: 3.02) | ATR: 2.23
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:34 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:35] O:7230.75 H:7231.25 L:7227.00 C:7227.50 V:3538.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7233.75 🔻 7230.50
+  📡 RSI: 31.9 | MACD: 1.94 (prev: 2.58) | ATR: 2.32
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:35 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:36] O:7227.50 H:7229.75 L:7226.50 C:7228.50 V:2599.0
+  📈 Trend: moderate_bullish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7231.25 🔻 7227.00
+  📡 RSI: 36.6 | MACD: 1.50 (prev: 1.94) | ATR: 2.41
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:36 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:37] O:7228.50 H:7228.50 L:7225.25 C:7227.25 V:3007.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7229.75 🔻 7226.50
+  📡 RSI: 27.5 | MACD: 1.04 (prev: 1.50) | ATR: 2.46
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:37 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:38] O:7227.50 H:7228.75 L:7227.25 C:7228.75 V:1025.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7228.50 🔻 7225.25
+  📡 RSI: 34.2 | MACD: 0.79 (prev: 1.04) | ATR: 2.39
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:38 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:39] O:7228.75 H:7230.75 L:7228.75 C:7230.50 V:1272.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7228.75 🔻 7227.25
+  📡 RSI: 42.1 | MACD: 0.72 (prev: 0.79) | ATR: 2.39
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:39 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:40] O:7230.50 H:7230.75 L:7228.00 C:7229.75 V:993.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7230.75 🔻 7228.75
+  📡 RSI: 43.8 | MACD: 0.60 (prev: 0.72) | ATR: 2.41
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:40 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:41] O:7230.00 H:7230.25 L:7228.00 C:7228.50 V:1321.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7230.75 🔻 7228.00
+  📡 RSI: 31.3 | MACD: 0.40 (prev: 0.60) | ATR: 2.32
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:41 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:42] O:7228.75 H:7232.25 L:7228.75 C:7231.50 V:1838.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7230.25 🔻 7228.00
+  📡 RSI: 40.3 | MACD: 0.47 (prev: 0.40) | ATR: 2.48
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:42 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:43] O:7231.50 H:7232.25 L:7231.50 C:7232.00 V:924.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7232.25 🔻 7228.75
+  📡 RSI: 41.8 | MACD: 0.57 (prev: 0.47) | ATR: 2.43
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:43 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:44] O:7232.25 H:7232.75 L:7231.25 C:7231.50 V:1057.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7232.25 🔻 7231.50
+  📡 RSI: 41.8 | MACD: 0.59 (prev: 0.57) | ATR: 2.41
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:44 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:45] O:7231.75 H:7232.00 L:7230.25 C:7230.50 V:1322.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7232.75 🔻 7231.25
+  📡 RSI: 38.3 | MACD: 0.53 (prev: 0.59) | ATR: 2.46
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:45 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:46] O:7230.50 H:7232.25 L:7230.50 C:7232.00 V:1012.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7232.00 🔻 7230.25
+  📡 RSI: 44.6 | MACD: 0.59 (prev: 0.53) | ATR: 2.48
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:46 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:47] O:7231.75 H:7232.50 L:7230.75 C:7232.00 V:888.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7232.25 🔻 7230.50
+  📡 RSI: 46.2 | MACD: 0.64 (prev: 0.59) | ATR: 2.41
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:47 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:48] O:7232.00 H:7232.25 L:7230.75 C:7231.75 V:916.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7232.50 🔻 7230.75
+  📡 RSI: 52.9 | MACD: 0.64 (prev: 0.64) | ATR: 2.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:48 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:49] O:7232.00 H:7233.25 L:7231.75 C:7232.50 V:787.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7232.25 🔻 7230.75
+  📡 RSI: 66.7 | MACD: 0.70 (prev: 0.64) | ATR: 2.09
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:49 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:50] O:7232.75 H:7233.50 L:7232.25 C:7233.25 V:1179.0
+  📈 Trend: moderate_bearish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7233.25 🔻 7231.75
+  📡 RSI: 66.1 | MACD: 0.80 (prev: 0.70) | ATR: 1.95
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:50 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:51] O:7233.50 H:7235.00 L:7233.00 C:7234.75 V:1505.0
+  📈 Trend: moderate_bearish (raw: strong_bullish)
+  🗺️  Grid: 0.080% | 🔺 7233.50 🔻 7232.25
+  📡 RSI: 75.0 | MACD: 0.98 (prev: 0.80) | ATR: 1.86
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:51 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:52] O:7234.75 H:7236.00 L:7234.75 C:7235.75 V:2059.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.00 🔻 7233.00
+  📡 RSI: 74.1 | MACD: 1.20 (prev: 0.98) | ATR: 1.84
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:52 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:53] O:7235.75 H:7235.75 L:7232.50 C:7233.25 V:1842.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7236.00 🔻 7234.75
+  📡 RSI: 59.0 | MACD: 1.15 (prev: 1.20) | ATR: 1.93
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:53 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:54] O:7233.25 H:7233.75 L:7233.00 C:7233.25 V:961.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.75 🔻 7232.50
+  📡 RSI: 62.1 | MACD: 1.10 (prev: 1.15) | ATR: 1.79
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:54 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:55] O:7233.25 H:7234.75 L:7233.25 C:7234.50 V:1035.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7233.75 🔻 7233.00
+  📡 RSI: 70.7 | MACD: 1.15 (prev: 1.10) | ATR: 1.73
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:55 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:56] O:7234.50 H:7234.50 L:7233.75 C:7233.75 V:679.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7234.75 🔻 7233.25
+  📡 RSI: 59.2 | MACD: 1.12 (prev: 1.15) | ATR: 1.52
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:56 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:57] O:7234.00 H:7235.50 L:7233.75 C:7235.00 V:1810.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7234.50 🔻 7233.75
+  📡 RSI: 61.5 | MACD: 1.18 (prev: 1.12) | ATR: 1.59
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:57 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:58] O:7235.00 H:7235.00 L:7233.75 C:7234.00 V:828.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.50 🔻 7233.75
+  📡 RSI: 59.3 | MACD: 1.13 (prev: 1.18) | ATR: 1.57
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:58 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 12:59] O:7234.00 H:7234.50 L:7232.75 C:7232.75 V:883.0
+  📈 Trend: strong_bullish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7235.00 🔻 7233.75
+  📡 RSI: 58.2 | MACD: 0.98 (prev: 1.13) | ATR: 1.57
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (12:59 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:00] O:7233.00 H:7234.00 L:7232.25 C:7233.25 V:1542.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7234.50 🔻 7232.75
+  📡 RSI: 54.9 | MACD: 0.90 (prev: 0.98) | ATR: 1.57
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:00 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:01] O:7233.50 H:7234.75 L:7233.25 C:7234.75 V:1717.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7234.00 🔻 7232.25
+  📡 RSI: 59.6 | MACD: 0.94 (prev: 0.90) | ATR: 1.55
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:01 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:02] O:7234.50 H:7235.75 L:7233.75 C:7235.75 V:1789.0
+  📈 Trend: moderate_bullish (raw: strong_bullish)
+  🗺️  Grid: 0.080% | 🔺 7234.75 🔻 7233.25
+  📡 RSI: 63.3 | MACD: 1.04 (prev: 0.94) | ATR: 1.59
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:02 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:03] O:7236.00 H:7238.25 L:7235.75 C:7237.25 V:3442.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.75 🔻 7233.75
+  📡 RSI: 65.1 | MACD: 1.22 (prev: 1.04) | ATR: 1.66
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:03 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:04] O:7237.25 H:7239.00 L:7237.25 C:7238.75 V:2389.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7238.25 🔻 7235.75
+  📡 RSI: 66.7 | MACD: 1.48 (prev: 1.22) | ATR: 1.70
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:04 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:05] O:7238.50 H:7239.50 L:7237.50 C:7239.50 V:1447.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7239.00 🔻 7237.25
+  📡 RSI: 65.1 | MACD: 1.72 (prev: 1.48) | ATR: 1.70
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:05 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:06] O:7239.50 H:7239.50 L:7237.75 C:7238.00 V:1523.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7239.50 🔻 7237.50
+  📡 RSI: 56.9 | MACD: 1.77 (prev: 1.72) | ATR: 1.73
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:06 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:07] O:7238.00 H:7238.25 L:7235.00 C:7235.50 V:2380.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7239.50 🔻 7237.75
+  📡 RSI: 56.9 | MACD: 1.58 (prev: 1.77) | ATR: 1.73
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:07 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:08] O:7235.50 H:7237.75 L:7235.25 C:7237.00 V:1598.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7238.25 🔻 7235.00
+  📡 RSI: 60.6 | MACD: 1.54 (prev: 1.58) | ATR: 1.86
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:08 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:09] O:7237.25 H:7237.25 L:7235.75 C:7236.50 V:1055.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7237.75 🔻 7235.25
+  📡 RSI: 55.9 | MACD: 1.46 (prev: 1.54) | ATR: 1.86
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:09 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:10] O:7236.25 H:7237.00 L:7236.00 C:7236.50 V:1459.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7237.25 🔻 7235.75
+  📡 RSI: 58.5 | MACD: 1.37 (prev: 1.46) | ATR: 1.88
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:10 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:11] O:7236.50 H:7237.00 L:7236.00 C:7236.00 V:953.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7237.00 🔻 7236.00
+  📡 RSI: 53.2 | MACD: 1.25 (prev: 1.37) | ATR: 1.82
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:11 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:12] O:7236.25 H:7237.00 L:7235.25 C:7235.75 V:1030.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7237.00 🔻 7236.00
+  📡 RSI: 55.9 | MACD: 1.12 (prev: 1.25) | ATR: 1.86
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:12 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:13] O:7235.75 H:7236.50 L:7234.75 C:7234.75 V:1249.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7237.00 🔻 7235.25
+  📡 RSI: 56.9 | MACD: 0.92 (prev: 1.12) | ATR: 1.86
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:13 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:14] O:7235.00 H:7235.50 L:7233.75 C:7234.00 V:1371.0
+  📈 Trend: strong_bullish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7236.50 🔻 7234.75
+  📡 RSI: 52.5 | MACD: 0.70 (prev: 0.92) | ATR: 1.86
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:14 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:15] O:7234.00 H:7234.25 L:7231.75 C:7232.75 V:2018.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7235.50 🔻 7233.75
+  📡 RSI: 43.1 | MACD: 0.42 (prev: 0.70) | ATR: 1.93
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:15 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:16] O:7232.75 H:7233.50 L:7232.25 C:7233.50 V:1473.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7234.25 🔻 7231.75
+  📡 RSI: 42.1 | MACD: 0.25 (prev: 0.42) | ATR: 1.88
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:16 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:17] O:7233.25 H:7233.50 L:7231.50 C:7232.75 V:1248.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7233.50 🔻 7232.25
+  📡 RSI: 33.3 | MACD: 0.06 (prev: 0.25) | ATR: 1.84
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:17 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:18] O:7232.50 H:7233.00 L:7231.25 C:7231.75 V:1150.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7233.50 🔻 7231.50
+  📡 RSI: 23.1 | MACD: -0.17 (prev: 0.06) | ATR: 1.84
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:18 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:19] O:7231.75 H:7232.25 L:7231.00 C:7231.75 V:2064.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7233.00 🔻 7231.25
+  📡 RSI: 18.4 | MACD: -0.35 (prev: -0.17) | ATR: 1.79
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:19 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:20] O:7231.75 H:7232.25 L:7230.25 C:7231.50 V:1297.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7232.25 🔻 7231.00
+  📡 RSI: 20.5 | MACD: -0.51 (prev: -0.35) | ATR: 1.80
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:20 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:21] O:7231.50 H:7231.75 L:7229.75 C:7230.75 V:1926.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7232.25 🔻 7230.25
+  📡 RSI: 24.3 | MACD: -0.69 (prev: -0.51) | ATR: 1.71
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:21 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:22] O:7231.00 H:7231.00 L:7228.75 C:7229.00 V:1928.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7231.75 🔻 7229.75
+  📡 RSI: 7.9 | MACD: -0.96 (prev: -0.69) | ATR: 1.70
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:22 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:23] O:7229.00 H:7229.50 L:7224.75 C:7227.00 V:3786.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7231.00 🔻 7228.75
+  📡 RSI: 6.8 | MACD: -1.32 (prev: -0.96) | ATR: 1.93
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:23 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:24] O:7227.25 H:7227.25 L:7225.50 C:7226.25 V:2333.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7229.50 🔻 7224.75
+  📡 RSI: 6.4 | MACD: -1.64 (prev: -1.32) | ATR: 1.98
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:24 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:25] O:7226.25 H:7226.50 L:7224.50 C:7225.00 V:2104.0
+  📈 Trend: moderate_bullish (raw: strong_bearish)
+  🗺️  Grid: 0.080% | 🔺 7227.25 🔻 7225.50
+  📡 RSI: 6.0 | MACD: -1.98 (prev: -1.64) | ATR: 2.05
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:25 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:26] O:7224.75 H:7226.00 L:7223.25 C:7224.00 V:2026.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7226.50 🔻 7224.50
+  📡 RSI: 5.7 | MACD: -2.30 (prev: -1.98) | ATR: 2.12
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:26 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:27] O:7224.00 H:7224.00 L:7221.00 C:7222.50 V:3584.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7226.00 🔻 7223.25
+  📡 RSI: 5.5 | MACD: -2.65 (prev: -2.30) | ATR: 2.21
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:27 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:28] O:7222.25 H:7226.00 L:7222.25 C:7225.75 V:2625.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.00 🔻 7221.00
+  📡 RSI: 24.6 | MACD: -2.63 (prev: -2.65) | ATR: 2.36
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:28 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:29] O:7225.75 H:7227.75 L:7225.75 C:7227.00 V:1806.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7226.00 🔻 7222.25
+  📡 RSI: 32.3 | MACD: -2.48 (prev: -2.63) | ATR: 2.32
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:29 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:30] O:7227.00 H:7228.00 L:7224.25 C:7225.25 V:2742.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7227.75 🔻 7225.75
+  📡 RSI: 26.1 | MACD: -2.48 (prev: -2.48) | ATR: 2.50
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:30 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:31] O:7225.00 H:7225.50 L:7223.50 C:7224.75 V:1843.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7228.00 🔻 7224.25
+  📡 RSI: 26.5 | MACD: -2.49 (prev: -2.48) | ATR: 2.50
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:31 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:32] O:7224.50 H:7225.50 L:7223.75 C:7225.00 V:1807.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.50 🔻 7223.50
+  📡 RSI: 29.2 | MACD: -2.45 (prev: -2.49) | ATR: 2.50
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:32 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:33] O:7225.00 H:7226.50 L:7224.75 C:7225.50 V:1723.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.50 🔻 7223.75
+  📡 RSI: 31.3 | MACD: -2.35 (prev: -2.45) | ATR: 2.54
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:33 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:34] O:7225.50 H:7226.25 L:7225.00 C:7225.50 V:1081.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7226.50 🔻 7224.75
+  📡 RSI: 31.8 | MACD: -2.25 (prev: -2.35) | ATR: 2.48
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:34 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:35] O:7225.50 H:7225.50 L:7223.00 C:7223.25 V:2165.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7226.25 🔻 7225.00
+  📡 RSI: 29.2 | MACD: -2.32 (prev: -2.25) | ATR: 2.52
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:35 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:36] O:7223.50 H:7224.25 L:7222.75 C:7223.25 V:1701.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.50 🔻 7223.00
+  📡 RSI: 32.3 | MACD: -2.35 (prev: -2.32) | ATR: 2.46
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:36 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:37] O:7223.00 H:7223.50 L:7222.00 C:7223.00 V:2424.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.25 🔻 7222.75
+  📡 RSI: 36.2 | MACD: -2.37 (prev: -2.35) | ATR: 2.23
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:37 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:38] O:7223.00 H:7223.50 L:7222.00 C:7222.50 V:1149.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7223.50 🔻 7222.00
+  📡 RSI: 36.8 | MACD: -2.39 (prev: -2.37) | ATR: 2.21
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:38 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:39] O:7222.75 H:7224.75 L:7222.25 C:7224.50 V:1504.0
+  📈 Trend: strong_bearish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7223.50 🔻 7222.00
+  📡 RSI: 48.3 | MACD: -2.23 (prev: -2.39) | ATR: 2.25
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:39 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:40] O:7224.25 H:7225.00 L:7223.00 C:7224.75 V:969.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.75 🔻 7222.25
+  📡 RSI: 52.6 | MACD: -2.05 (prev: -2.23) | ATR: 2.20
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:40 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:41] O:7225.00 H:7225.25 L:7223.00 C:7223.75 V:1119.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.00 🔻 7223.00
+  📡 RSI: 54.5 | MACD: -1.97 (prev: -2.05) | ATR: 2.14
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:41 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:42] O:7223.75 H:7224.00 L:7222.75 C:7223.25 V:758.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.25 🔻 7223.00
+  📡 RSI: 38.6 | MACD: -1.92 (prev: -1.97) | ATR: 1.96
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:42 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:43] O:7223.00 H:7223.00 L:7220.75 C:7221.25 V:1326.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.00 🔻 7222.75
+  📡 RSI: 25.5 | MACD: -2.02 (prev: -1.92) | ATR: 2.00
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:43 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:44] O:7221.00 H:7221.50 L:7219.25 C:7219.75 V:1611.0
+  📈 Trend: moderate_bearish (raw: strong_bearish)
+  🗺️  Grid: 0.080% | 🔺 7223.00 🔻 7220.75
+  📡 RSI: 26.1 | MACD: -2.20 (prev: -2.02) | ATR: 1.89
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:44 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:45] O:7219.75 H:7219.75 L:7217.50 C:7219.00 V:3000.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7221.50 🔻 7219.25
+  📡 RSI: 25.5 | MACD: -2.37 (prev: -2.20) | ATR: 1.91
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:45 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:46] O:7219.00 H:7220.75 L:7217.50 C:7220.50 V:1593.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7219.75 🔻 7217.50
+  📡 RSI: 32.7 | MACD: -2.36 (prev: -2.37) | ATR: 2.02
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:46 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:47] O:7220.50 H:7222.50 L:7220.25 C:7222.25 V:1647.0
+  📈 Trend: strong_bearish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7220.75 🔻 7217.50
+  📡 RSI: 38.6 | MACD: -2.19 (prev: -2.36) | ATR: 2.05
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:47 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:48] O:7222.50 H:7222.50 L:7221.00 C:7222.25 V:1165.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7222.50 🔻 7220.25
+  📡 RSI: 38.6 | MACD: -2.02 (prev: -2.19) | ATR: 2.07
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:48 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:49] O:7222.25 H:7224.25 L:7221.75 C:7224.00 V:1991.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7222.50 🔻 7221.00
+  📡 RSI: 52.7 | MACD: -1.73 (prev: -2.02) | ATR: 2.07
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:49 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:50] O:7224.00 H:7225.00 L:7223.00 C:7223.25 V:2236.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.25 🔻 7221.75
+  📡 RSI: 50.0 | MACD: -1.55 (prev: -1.73) | ATR: 2.11
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:50 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:51] O:7223.25 H:7225.00 L:7222.50 C:7224.75 V:1525.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.00 🔻 7223.00
+  📡 RSI: 55.6 | MACD: -1.26 (prev: -1.55) | ATR: 2.18
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:51 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:52] O:7225.00 H:7225.00 L:7218.50 C:7221.75 V:5894.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.00 🔻 7222.50
+  📡 RSI: 47.9 | MACD: -1.26 (prev: -1.26) | ATR: 2.54
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:52 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:53] O:7221.75 H:7222.50 L:7220.00 C:7220.25 V:1310.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.00 🔻 7218.50
+  📡 RSI: 38.0 | MACD: -1.37 (prev: -1.26) | ATR: 2.54
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:53 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:54] O:7220.50 H:7221.00 L:7219.50 C:7220.50 V:1058.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7222.50 🔻 7220.00
+  📡 RSI: 38.0 | MACD: -1.42 (prev: -1.37) | ATR: 2.50
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:54 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:55] O:7220.25 H:7222.75 L:7219.75 C:7222.75 V:1386.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7221.00 🔻 7219.50
+  📡 RSI: 47.4 | MACD: -1.26 (prev: -1.42) | ATR: 2.55
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:55 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:56] O:7222.75 H:7224.25 L:7222.25 C:7224.25 V:1334.0
+  📈 Trend: moderate_bearish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7222.75 🔻 7219.75
+  📡 RSI: 52.5 | MACD: -1.01 (prev: -1.26) | ATR: 2.61
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:56 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:57] O:7224.25 H:7225.00 L:7223.25 C:7225.00 V:1647.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7224.25 🔻 7222.25
+  📡 RSI: 60.0 | MACD: -0.73 (prev: -1.01) | ATR: 2.55
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:57 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:58] O:7224.75 H:7225.00 L:7224.00 C:7224.25 V:1359.0
+  📈 Trend: moderate_bullish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7225.00 🔻 7223.25
+  📡 RSI: 62.5 | MACD: -0.57 (prev: -0.73) | ATR: 2.46
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:58 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 13:59] O:7224.25 H:7225.00 L:7223.00 C:7223.75 V:2684.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.00 🔻 7224.00
+  📡 RSI: 63.4 | MACD: -0.48 (prev: -0.57) | ATR: 2.45
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (13:59 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:00] O:7224.00 H:7224.50 L:7223.25 C:7223.75 V:1502.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.00 🔻 7223.00
+  📡 RSI: 60.0 | MACD: -0.40 (prev: -0.48) | ATR: 2.30
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:00 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:01] O:7223.50 H:7223.75 L:7222.25 C:7222.75 V:1338.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.50 🔻 7223.25
+  📡 RSI: 51.6 | MACD: -0.41 (prev: -0.40) | ATR: 2.25
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:01 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:02] O:7222.50 H:7223.00 L:7221.00 C:7221.00 V:1231.0
+  📈 Trend: moderate_bearish (raw: strong_bearish)
+  🗺️  Grid: 0.080% | 🔺 7223.75 🔻 7222.25
+  📡 RSI: 46.4 | MACD: -0.56 (prev: -0.41) | ATR: 2.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:02 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:03] O:7221.25 H:7223.00 L:7220.50 C:7223.00 V:1183.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7223.00 🔻 7221.00
+  📡 RSI: 47.1 | MACD: -0.50 (prev: -0.56) | ATR: 2.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:03 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:04] O:7223.00 H:7224.00 L:7222.50 C:7222.75 V:1664.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7223.00 🔻 7220.50
+  📡 RSI: 48.5 | MACD: -0.48 (prev: -0.50) | ATR: 2.25
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:04 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:05] O:7222.50 H:7227.00 L:7222.00 C:7226.75 V:4207.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.00 🔻 7222.50
+  📡 RSI: 55.1 | MACD: -0.13 (prev: -0.48) | ATR: 2.43
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:05 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:06] O:7226.75 H:7231.50 L:7224.75 C:7226.75 V:10156.0
+  📈 Trend: moderate_bearish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7227.00 🔻 7222.00
+  📡 RSI: 65.2 | MACD: 0.14 (prev: -0.13) | ATR: 2.45
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:06 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:07] O:7227.00 H:7229.75 L:7225.50 C:7228.00 V:7414.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7231.50 🔻 7224.75
+  📡 RSI: 73.8 | MACD: 0.45 (prev: 0.14) | ATR: 2.57
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:07 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:08] O:7228.00 H:7230.50 L:7227.50 C:7229.00 V:3071.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7229.75 🔻 7225.50
+  📡 RSI: 75.0 | MACD: 0.77 (prev: 0.45) | ATR: 2.68
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:08 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:09] O:7229.25 H:7230.25 L:7228.25 C:7228.25 V:1519.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7230.50 🔻 7227.50
+  📡 RSI: 67.7 | MACD: 0.95 (prev: 0.77) | ATR: 2.61
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:09 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:10] O:7228.00 H:7228.50 L:7226.75 C:7227.50 V:1665.0
+  📈 Trend: moderate_bullish (raw: strong_bullish)
+  🗺️  Grid: 0.080% | 🔺 7230.25 🔻 7228.25
+  📡 RSI: 61.0 | MACD: 1.02 (prev: 0.95) | ATR: 2.59
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:10 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:11] O:7227.50 H:7229.25 L:7227.00 C:7227.50 V:1710.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7228.50 🔻 7226.75
+  📡 RSI: 58.9 | MACD: 1.07 (prev: 1.02) | ATR: 2.62
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:11 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:12] O:7227.50 H:7229.00 L:7227.25 C:7228.50 V:1198.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7229.25 🔻 7227.00
+  📡 RSI: 64.9 | MACD: 1.17 (prev: 1.07) | ATR: 2.68
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:12 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:13] O:7228.75 H:7229.00 L:7227.75 C:7228.50 V:858.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7229.00 🔻 7227.25
+  📡 RSI: 67.3 | MACD: 1.23 (prev: 1.17) | ATR: 2.62
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:13 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:14] O:7228.75 H:7229.50 L:7228.00 C:7229.50 V:1045.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7229.00 🔻 7227.75
+  📡 RSI: 69.5 | MACD: 1.35 (prev: 1.23) | ATR: 2.64
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:14 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:15] O:7229.50 H:7230.25 L:7228.25 C:7228.50 V:1711.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7229.50 🔻 7228.00
+  📡 RSI: 69.5 | MACD: 1.35 (prev: 1.35) | ATR: 2.68
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:15 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:16] O:7228.25 H:7231.00 L:7228.25 C:7230.25 V:1437.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7230.25 🔻 7228.25
+  📡 RSI: 81.4 | MACD: 1.47 (prev: 1.35) | ATR: 2.73
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:16 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:17] O:7230.25 H:7231.00 L:7229.50 C:7229.75 V:1646.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7231.00 🔻 7228.25
+  📡 RSI: 75.5 | MACD: 1.51 (prev: 1.47) | ATR: 2.66
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:17 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:18] O:7229.75 H:7230.25 L:7229.25 C:7229.75 V:1045.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7231.00 🔻 7229.50
+  📡 RSI: 76.9 | MACD: 1.52 (prev: 1.51) | ATR: 2.62
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:18 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:19] O:7229.75 H:7230.00 L:7228.00 C:7228.25 V:993.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7230.25 🔻 7229.25
+  📡 RSI: 57.1 | MACD: 1.40 (prev: 1.52) | ATR: 2.41
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:19 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:20] O:7228.25 H:7229.25 L:7227.00 C:7228.25 V:1277.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7230.00 🔻 7228.00
+  📡 RSI: 57.1 | MACD: 1.28 (prev: 1.40) | ATR: 2.09
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:20 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:21] O:7228.50 H:7228.75 L:7227.75 C:7228.75 V:943.0
+  📈 Trend: strong_bullish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7229.25 🔻 7227.00
+  📡 RSI: 53.8 | MACD: 1.22 (prev: 1.28) | ATR: 1.86
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:21 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:22] O:7228.75 H:7229.00 L:7226.50 C:7226.75 V:1306.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7228.75 🔻 7227.75
+  📡 RSI: 39.5 | MACD: 0.99 (prev: 1.22) | ATR: 1.82
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:22 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:23] O:7226.50 H:7228.25 L:7226.25 C:7228.00 V:1430.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7229.00 🔻 7226.50
+  📡 RSI: 48.9 | MACD: 0.91 (prev: 0.99) | ATR: 1.82
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:23 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:24] O:7228.25 H:7228.75 L:7227.50 C:7228.00 V:838.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7228.25 🔻 7226.25
+  📡 RSI: 52.4 | MACD: 0.83 (prev: 0.91) | ATR: 1.79
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:24 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:25] O:7228.25 H:7229.00 L:7223.25 C:7226.50 V:4860.0
+  📈 Trend: moderate_bullish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7228.75 🔻 7227.50
+  📡 RSI: 45.8 | MACD: 0.64 (prev: 0.83) | ATR: 2.04
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:25 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:26] O:7226.50 H:7227.25 L:7224.75 C:7226.50 V:2088.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7229.00 🔻 7223.25
+  📡 RSI: 40.9 | MACD: 0.48 (prev: 0.64) | ATR: 2.09
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:26 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:27] O:7226.50 H:7228.25 L:7225.75 C:7226.00 V:1301.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7227.25 🔻 7224.75
+  📡 RSI: 39.1 | MACD: 0.31 (prev: 0.48) | ATR: 2.18
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:27 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:28] O:7225.75 H:7229.00 L:7225.50 C:7228.75 V:1982.0
+  📈 Trend: moderate_bearish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7228.25 🔻 7225.75
+  📡 RSI: 47.2 | MACD: 0.40 (prev: 0.31) | ATR: 2.32
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:28 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:29] O:7228.75 H:7229.75 L:7226.25 C:7226.75 V:1692.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7229.00 🔻 7225.50
+  📡 RSI: 43.9 | MACD: 0.30 (prev: 0.40) | ATR: 2.43
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:29 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:30] O:7226.75 H:7228.00 L:7226.25 C:7227.00 V:2156.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7229.75 🔻 7226.25
+  📡 RSI: 37.3 | MACD: 0.24 (prev: 0.30) | ATR: 2.36
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:30 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:31] O:7227.00 H:7229.00 L:7226.75 C:7229.00 V:1368.0
+  📈 Trend: moderate_bearish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7228.00 🔻 7226.25
+  📡 RSI: 47.4 | MACD: 0.35 (prev: 0.24) | ATR: 2.41
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:31 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:32] O:7229.00 H:7229.00 L:7227.50 C:7228.50 V:1283.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7229.00 🔻 7226.75
+  📡 RSI: 45.8 | MACD: 0.39 (prev: 0.35) | ATR: 2.45
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:32 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:33] O:7228.50 H:7229.50 L:7228.25 C:7229.25 V:1138.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7229.00 🔻 7227.50
+  📡 RSI: 53.6 | MACD: 0.48 (prev: 0.39) | ATR: 2.39
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:33 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:34] O:7229.00 H:7229.75 L:7228.50 C:7229.00 V:1190.0
+  📈 Trend: moderate_bearish (raw: strong_bullish)
+  🗺️  Grid: 0.080% | 🔺 7229.50 🔻 7228.25
+  📡 RSI: 52.6 | MACD: 0.52 (prev: 0.48) | ATR: 2.32
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:34 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:35] O:7229.00 H:7230.25 L:7228.75 C:7230.00 V:1252.0
+  📈 Trend: moderate_bearish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7229.75 🔻 7228.50
+  📡 RSI: 54.2 | MACD: 0.63 (prev: 0.52) | ATR: 2.36
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:35 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:36] O:7230.25 H:7230.50 L:7229.50 C:7229.75 V:1111.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7230.25 🔻 7228.75
+  📡 RSI: 61.5 | MACD: 0.69 (prev: 0.63) | ATR: 2.25
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:36 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:37] O:7229.50 H:7231.25 L:7229.50 C:7230.75 V:1297.0
+  📈 Trend: moderate_bullish (raw: strong_bullish)
+  🗺️  Grid: 0.080% | 🔺 7230.50 🔻 7229.50
+  📡 RSI: 60.8 | MACD: 0.80 (prev: 0.69) | ATR: 2.23
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:37 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:38] O:7230.75 H:7231.50 L:7229.50 C:7229.75 V:1352.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7231.25 🔻 7229.50
+  📡 RSI: 56.4 | MACD: 0.81 (prev: 0.80) | ATR: 2.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:38 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:39] O:7229.75 H:7229.75 L:7228.25 C:7228.75 V:1434.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7231.50 🔻 7229.50
+  📡 RSI: 58.5 | MACD: 0.72 (prev: 0.81) | ATR: 1.98
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:39 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:40] O:7228.75 H:7229.75 L:7227.25 C:7227.75 V:1742.0
+  📈 Trend: strong_bullish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7229.75 🔻 7228.25
+  📡 RSI: 54.4 | MACD: 0.56 (prev: 0.72) | ATR: 1.98
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:40 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:41] O:7227.50 H:7228.50 L:7226.25 C:7226.50 V:1442.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7229.75 🔻 7227.25
+  📡 RSI: 51.7 | MACD: 0.34 (prev: 0.56) | ATR: 1.96
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:41 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:42] O:7226.75 H:7227.75 L:7226.00 C:7227.75 V:1191.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7228.50 🔻 7226.25
+  📡 RSI: 46.3 | MACD: 0.25 (prev: 0.34) | ATR: 1.84
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:42 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:43] O:7227.50 H:7228.00 L:7226.50 C:7226.75 V:989.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7227.75 🔻 7226.00
+  📡 RSI: 50.0 | MACD: 0.10 (prev: 0.25) | ATR: 1.70
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:43 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:44] O:7226.50 H:7227.25 L:7225.75 C:7226.50 V:1756.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7228.00 🔻 7226.50
+  📡 RSI: 48.0 | MACD: -0.03 (prev: 0.10) | ATR: 1.68
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:44 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:45] O:7226.50 H:7226.75 L:7225.25 C:7225.75 V:2252.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7227.25 🔻 7225.75
+  📡 RSI: 35.6 | MACD: -0.20 (prev: -0.03) | ATR: 1.62
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:45 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:46] O:7225.75 H:7227.25 L:7225.00 C:7226.75 V:1868.0
+  📈 Trend: moderate_bullish (raw: strong_bullish)
+  🗺️  Grid: 0.080% | 🔺 7226.75 🔻 7225.25
+  📡 RSI: 42.6 | MACD: -0.25 (prev: -0.20) | ATR: 1.68
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:46 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:47] O:7226.50 H:7229.75 L:7226.50 C:7229.50 V:2127.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7227.25 🔻 7225.00
+  📡 RSI: 50.9 | MACD: -0.06 (prev: -0.25) | ATR: 1.82
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:47 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:48] O:7229.75 H:7230.75 L:7228.75 C:7229.25 V:1871.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7229.75 🔻 7226.50
+  📡 RSI: 50.9 | MACD: 0.06 (prev: -0.06) | ATR: 1.88
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:48 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:49] O:7229.50 H:7231.00 L:7229.00 C:7230.50 V:1815.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7230.75 🔻 7228.75
+  📡 RSI: 51.8 | MACD: 0.26 (prev: 0.06) | ATR: 1.91
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:49 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:50] O:7230.50 H:7230.75 L:7224.50 C:7224.75 V:7421.0
+  📈 Trend: strong_bullish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7231.00 🔻 7229.00
+  📡 RSI: 37.2 | MACD: -0.05 (prev: 0.26) | ATR: 2.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:50 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:51] O:7224.75 H:7226.00 L:7224.00 C:7226.00 V:3435.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7230.75 🔻 7224.50
+  📡 RSI: 38.0 | MACD: -0.19 (prev: -0.05) | ATR: 2.30
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:51 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:52] O:7226.00 H:7226.50 L:7223.75 C:7224.25 V:3258.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7226.00 🔻 7224.00
+  📡 RSI: 36.6 | MACD: -0.44 (prev: -0.19) | ATR: 2.36
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:52 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:53] O:7224.50 H:7225.50 L:7223.50 C:7224.75 V:3466.0
+  📈 Trend: moderate_bullish (raw: strong_bearish)
+  🗺️  Grid: 0.080% | 🔺 7226.50 🔻 7223.75
+  📡 RSI: 40.0 | MACD: -0.59 (prev: -0.44) | ATR: 2.39
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:53 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:54] O:7225.00 H:7225.25 L:7223.25 C:7225.00 V:3573.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.50 🔻 7223.50
+  📡 RSI: 42.9 | MACD: -0.68 (prev: -0.59) | ATR: 2.36
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:54 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:55] O:7225.00 H:7226.75 L:7223.25 C:7225.50 V:4473.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.25 🔻 7223.25
+  📡 RSI: 47.3 | MACD: -0.70 (prev: -0.68) | ATR: 2.45
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:55 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:56] O:7225.25 H:7226.00 L:7224.50 C:7226.00 V:3519.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7226.75 🔻 7223.25
+  📡 RSI: 45.1 | MACD: -0.67 (prev: -0.70) | ATR: 2.43
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:56 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:57] O:7226.25 H:7227.50 L:7225.75 C:7227.00 V:4641.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7226.00 🔻 7224.50
+  📡 RSI: 50.7 | MACD: -0.56 (prev: -0.67) | ATR: 2.45
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:57 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:58] O:7227.25 H:7228.75 L:7226.25 C:7228.50 V:6147.0
+  📈 Trend: strong_bearish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7227.50 🔻 7225.75
+  📡 RSI: 55.3 | MACD: -0.35 (prev: -0.56) | ATR: 2.52
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:58 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 14:59] O:7228.75 H:7231.50 L:7227.25 C:7231.25 V:40094.0
+  📈 Trend: strong_bearish (raw: strong_bullish)
+  🗺️  Grid: 0.080% | 🔺 7228.75 🔻 7226.25
+  📡 RSI: 63.1 | MACD: 0.04 (prev: -0.35) | ATR: 2.71
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (14:59 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:00] O:7231.00 H:7231.50 L:7227.00 C:7227.00 V:10675.0
+  📈 Trend: strong_bullish
+  🗺️  Grid: 0.080% | 🔺 7231.50 🔻 7227.25
+  📡 RSI: 50.5 | MACD: 0.01 (prev: 0.04) | ATR: 2.88
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:00 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:01] O:7227.25 H:7227.50 L:7226.00 C:7226.50 V:2218.0
+  📈 Trend: strong_bullish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7231.50 🔻 7227.00
+  📡 RSI: 43.2 | MACD: -0.06 (prev: 0.01) | ATR: 2.75
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:01 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:02] O:7226.25 H:7226.50 L:7225.50 C:7225.50 V:1487.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7227.50 🔻 7226.00
+  📡 RSI: 41.8 | MACD: -0.19 (prev: -0.06) | ATR: 2.68
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:02 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:03] O:7225.75 H:7226.75 L:7225.50 C:7226.75 V:1085.0
+  📈 Trend: moderate_bearish (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7226.50 🔻 7225.50
+  📡 RSI: 41.8 | MACD: -0.19 (prev: -0.19) | ATR: 2.62
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:03 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:04] O:7226.75 H:7227.00 L:7225.50 C:7225.75 V:917.0
+  📈 Trend: moderate_bearish (raw: strong_bearish)
+  🗺️  Grid: 0.080% | 🔺 7226.75 🔻 7225.50
+  📡 RSI: 52.8 | MACD: -0.27 (prev: -0.19) | ATR: 2.29
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:04 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:05] O:7226.00 H:7228.00 L:7225.00 C:7225.50 V:1609.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7227.00 🔻 7225.50
+  📡 RSI: 48.5 | MACD: -0.35 (prev: -0.27) | ATR: 2.36
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:05 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:06] O:7225.75 H:7225.75 L:7224.50 C:7224.75 V:702.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7228.00 🔻 7225.00
+  📡 RSI: 51.6 | MACD: -0.46 (prev: -0.35) | ATR: 2.25
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:06 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:07] O:7225.00 H:7225.50 L:7224.50 C:7224.50 V:274.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.75 🔻 7224.50
+  📡 RSI: 49.2 | MACD: -0.57 (prev: -0.46) | ATR: 2.18
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:07 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:08] O:7224.50 H:7225.00 L:7224.00 C:7224.50 V:592.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.50 🔻 7224.50
+  📡 RSI: 48.4 | MACD: -0.65 (prev: -0.57) | ATR: 2.11
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:08 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:09] O:7224.50 H:7224.50 L:7223.75 C:7223.75 V:1095.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.00 🔻 7224.00
+  📡 RSI: 44.4 | MACD: -0.76 (prev: -0.65) | ATR: 1.91
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:09 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:10] O:7224.00 H:7224.00 L:7223.00 C:7223.50 V:1226.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.50 🔻 7223.75
+  📡 RSI: 41.9 | MACD: -0.86 (prev: -0.76) | ATR: 1.88
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:10 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:11] O:7223.50 H:7224.25 L:7222.75 C:7224.25 V:787.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.00 🔻 7223.00
+  📡 RSI: 41.0 | MACD: -0.87 (prev: -0.86) | ATR: 1.86
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:11 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:12] O:7224.00 H:7224.25 L:7223.25 C:7223.75 V:556.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.25 🔻 7222.75
+  📡 RSI: 33.3 | MACD: -0.90 (prev: -0.87) | ATR: 1.75
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:12 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:13] O:7223.75 H:7224.75 L:7223.75 C:7224.50 V:768.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.25 🔻 7223.25
+  📡 RSI: 22.4 | MACD: -0.86 (prev: -0.90) | ATR: 1.52
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:13 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:14] O:7224.50 H:7226.00 L:7224.50 C:7225.25 V:870.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.75 🔻 7223.75
+  📡 RSI: 40.0 | MACD: -0.76 (prev: -0.86) | ATR: 1.30
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:14 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:15] O:7225.00 H:7225.50 L:7224.75 C:7225.00 V:401.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7226.00 🔻 7224.50
+  📡 RSI: 41.2 | MACD: -0.69 (prev: -0.76) | ATR: 1.25
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:15 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:16] O:7225.25 H:7226.00 L:7225.25 C:7225.75 V:350.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.50 🔻 7224.75
+  📡 RSI: 51.5 | MACD: -0.57 (prev: -0.69) | ATR: 1.25
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:16 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:17] O:7226.00 H:7226.25 L:7225.25 C:7225.25 V:506.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7226.00 🔻 7225.25
+  📡 RSI: 40.0 | MACD: -0.51 (prev: -0.57) | ATR: 1.23
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:17 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:18] O:7225.25 H:7225.25 L:7223.75 C:7223.75 V:664.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7226.25 🔻 7225.25
+  📡 RSI: 37.5 | MACD: -0.57 (prev: -0.51) | ATR: 1.23
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:18 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:19] O:7223.75 H:7224.00 L:7223.00 C:7223.25 V:287.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.25 🔻 7223.75
+  📡 RSI: 36.4 | MACD: -0.66 (prev: -0.57) | ATR: 1.09
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:19 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:20] O:7223.25 H:7223.50 L:7222.75 C:7223.00 V:374.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.00 🔻 7223.00
+  📡 RSI: 38.7 | MACD: -0.74 (prev: -0.66) | ATR: 1.05
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:20 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:21] O:7223.00 H:7223.75 L:7222.75 C:7223.75 V:293.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7223.50 🔻 7222.75
+  📡 RSI: 45.5 | MACD: -0.73 (prev: -0.74) | ATR: 1.05
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:21 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:22] O:7223.50 H:7224.75 L:7223.25 C:7224.50 V:278.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7223.75 🔻 7222.75
+  📡 RSI: 50.0 | MACD: -0.66 (prev: -0.73) | ATR: 1.09
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:22 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:23] O:7224.50 H:7224.75 L:7223.75 C:7224.50 V:321.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.75 🔻 7223.25
+  📡 RSI: 54.5 | MACD: -0.59 (prev: -0.66) | ATR: 1.11
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:23 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:24] O:7224.50 H:7224.75 L:7224.25 C:7224.75 V:244.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7224.75 🔻 7223.75
+  📡 RSI: 57.6 | MACD: -0.51 (prev: -0.59) | ATR: 1.07
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:24 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:25] O:7224.75 H:7225.50 L:7224.50 C:7225.25 V:168.0
+  📈 Trend: strong_bearish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7224.75 🔻 7224.25
+  📡 RSI: 56.2 | MACD: -0.41 (prev: -0.51) | ATR: 1.04
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:25 CT) — no entries
+  💰 Daily P&L: $+0.00
+
+[2026-05-04 15:26] O:7225.50 H:7227.50 L:7225.50 C:7226.50 V:1613.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7225.50 🔻 7224.50
+  📡 RSI: 65.7 | MACD: -0.22 (prev: -0.41) | ATR: 1.12
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  🕐 Outside session (15:26 CT) — no entries
+  💰 Daily P&L: $+0.00
+→ Real-time bars cancelled
+✓ Disconnected from IBKR
