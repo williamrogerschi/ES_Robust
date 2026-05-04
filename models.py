@@ -252,7 +252,7 @@ def get_scalp_robust_config() -> StrategyConfig:
         use_session_filter=True,
         session_start_hour=8,
         session_start_minute=30,
-        session_end_hour=11,
+        session_end_hour=12,
         session_end_minute=0,
         use_5m_filter=True,
         use_volume_filter=False,

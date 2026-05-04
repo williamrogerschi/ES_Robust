@@ -297,6 +297,21 @@ class GridStrategy:
         prev_bar = self.bars[-2]
         current_macd = self.indicators.cache.get('macd', {}).get('macd', 0.0)
 
+        # RAW TREND CONTRADICTION FILTER
+        # Block any trade where the raw (unconfirmed) trend directly contradicts
+        # the intended trade direction. Prevents entering against clear momentum
+        # even when confirmed trend hasn't caught up yet.
+        raw_is_bullish = self.current_trend in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH]
+        raw_is_bearish = self.current_trend in [TrendState.STRONG_BEARISH, TrendState.MODERATE_BEARISH]
+        confirmed_wants_short = trend in [TrendState.STRONG_BEARISH, TrendState.MODERATE_BEARISH] or trend == TrendState.SIDEWAYS
+        confirmed_wants_long = trend in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH] or trend == TrendState.SIDEWAYS
+
+        def _raw_trend_blocks_short() -> bool:
+            return raw_is_bullish
+
+        def _raw_trend_blocks_long() -> bool:
+            return raw_is_bearish
+
         def _short_blocked_by_session_low() -> bool:
             if not self.config.use_session_low_short_filter:
                 return False
@@ -317,6 +332,9 @@ class GridStrategy:
             if rsi > self.config.entry_rsi_bearish:
                 if current_price < prev_bar['low']:
                     if not _short_blocked_by_session_low():
+                        if _raw_trend_blocks_short():
+                            print(f"  🚫 Raw trend blocks SHORT | raw: {self.current_trend.value}")
+                            return
                         if not self._macd_momentum_ok('short'):
                             print(f"  ⏭️ MACD filter blocked SHORT | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
                             self._macd_blocked_trades.append({
@@ -333,6 +351,9 @@ class GridStrategy:
         elif trend in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH]:
             if rsi < self.config.entry_rsi_bullish:
                 if current_price > prev_bar['high']:
+                    if _raw_trend_blocks_long():
+                        print(f"  🚫 Raw trend blocks LONG | raw: {self.current_trend.value}")
+                        return
                     if not self._macd_momentum_ok('long'):
                         print(f"  ⏭️ MACD filter blocked LONG | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
                         self._macd_blocked_trades.append({
@@ -350,6 +371,9 @@ class GridStrategy:
             if rsi > self.config.entry_rsi_sideways_short:
                 if current_price < prev_bar['low']:
                     if not _short_blocked_by_session_low():
+                        if _raw_trend_blocks_short():
+                            print(f"  🚫 Raw trend blocks SHORT (sideways) | raw: {self.current_trend.value}")
+                            return
                         if not self._macd_momentum_ok('short'):
                             print(f"  ⏭️ MACD filter blocked SHORT (sideways) | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
                             self._macd_blocked_trades.append({
@@ -365,6 +389,9 @@ class GridStrategy:
                         await self._enter_short(current_price, rsi, trend)
             elif rsi < self.config.entry_rsi_sideways_long:
                 if current_price > prev_bar['high']:
+                    if _raw_trend_blocks_long():
+                        print(f"  🚫 Raw trend blocks LONG (sideways) | raw: {self.current_trend.value}")
+                        return
                     if not self._macd_momentum_ok('long'):
                         print(f"  ⏭️ MACD filter blocked LONG (sideways) | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
                         self._macd_blocked_trades.append({
@@ -711,15 +738,17 @@ class GridStrategy:
         local_time = bar['time'].astimezone(CENTRAL)
         time_str = local_time.strftime('%Y-%m-%d %H:%M')
         print(f"\n[{time_str}] O:{bar['open']:.2f} H:{bar['high']:.2f} L:{bar['low']:.2f} C:{bar['close']:.2f} V:{bar['volume']}")
+        # Snapshot PREVIOUS bar's MACD before recalculating indicators
+        # Must happen BEFORE calculate_all so we capture last bar's value, not current
+        if self.indicators.cache:
+            self._prev_macd = self.indicators.cache.get('macd', {}).get('macd', 0.0)
+
         if not self.indicators.calculate_all(self.bars):
             bars_needed = self.config.super_long_ma_length - len(self.bars)
             print(f"  ⏳ Warming up... need {bars_needed} more bars")
             return
         self.previous_trend = self.confirmed_trend
         self.prev_rsi = self.indicators.cache.get('rsi', 50)
-
-        # Snapshot current bar's MACD — becomes "previous" on the next bar
-        self._prev_macd = self.indicators.cache.get('macd', {}).get('macd', 0.0)
 
         self.bars_since_exit += 1
         self.current_trend = self._determine_trend()
