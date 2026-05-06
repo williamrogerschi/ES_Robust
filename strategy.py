@@ -236,6 +236,38 @@ class GridStrategy:
         return self.config.contracts_per_trade
 
     # -------------------------------------------------------------------------
+    # 5M BAR SEEDING FROM HISTORICAL DATA
+    # -------------------------------------------------------------------------
+    def seed_5m_bars(self, historical_bars: List[Dict]):
+        """Build 5m bars from historical 1m bars for indicator warmup.
+        Call once after historical warmup completes in main.py.
+        Fixes current_trend_5m being stuck on SIDEWAYS all session.
+        """
+        buffer = []
+        for bar in historical_bars:
+            buffer.append(bar)
+            if len(buffer) >= 5:
+                bar_5m = {
+                    'time': buffer[0]['time'],
+                    'open': buffer[0]['open'],
+                    'high': max(b['high'] for b in buffer),
+                    'low': min(b['low'] for b in buffer),
+                    'close': buffer[-1]['close'],
+                    'volume': sum(b['volume'] for b in buffer)
+                }
+                self.bars_5m.append(bar_5m)
+                buffer = []
+        # Keep leftover bars as starting buffer for live aggregation
+        self._5m_bar_buffer = buffer
+        if self.indicators_5m.calculate_all(self.bars_5m):
+            self.current_trend_5m = self._determine_trend_5m()
+        else:
+            self.current_trend_5m = TrendState.SIDEWAYS
+        print(f"  📊 5m warmup: {len(self.bars_5m)} bars built | "
+              f"trend: {self.current_trend_5m.value} | "
+              f"buffer: {len(self._5m_bar_buffer)} bar(s) carried over")
+
+    # -------------------------------------------------------------------------
     # MACD MOMENTUM FILTER
     # -------------------------------------------------------------------------
     def _macd_momentum_ok(self, direction: str) -> bool:
@@ -753,6 +785,9 @@ class GridStrategy:
         self.bars_since_exit += 1
         self.current_trend = self._determine_trend()
         self._get_confirmed_trend()
+
+        # 5M BAR AGGREGATION (live bars only)
+        # seed_5m_bars() handles historical warmup — this only processes live bars.
         if self.config.use_5m_filter:
             self._5m_bar_buffer.append(bar)
             if len(self._5m_bar_buffer) >= 5:
@@ -768,6 +803,7 @@ class GridStrategy:
                 self._5m_bar_buffer = []
                 if self.indicators_5m.calculate_all(self.bars_5m):
                     self.current_trend_5m = self._determine_trend_5m()
+
         grid_size = self._calculate_grid_size()
         ind = self.indicators.cache
         trend_display = f"{self.confirmed_trend.value}"

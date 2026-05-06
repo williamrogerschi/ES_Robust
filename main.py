@@ -109,6 +109,10 @@ async def main():
                 strategy.current_trend = strategy._determine_trend()
                 strategy._prev_macd = strategy.indicators.cache.get('macd', {}).get('macd', 0.0)
 
+                # Seed 5m bars from historical data so 5m trend reads correctly on startup
+                if config.use_5m_filter:
+                    strategy.seed_5m_bars(historical_bars)
+
                 ind = strategy.indicators.cache
                 print(f"\nIndicators ready!")
                 print(f"  Bars loaded: {len(strategy.bars)}")
@@ -118,6 +122,8 @@ async def main():
                 print(f"  ATR: {ind['atr']:.2f}")
                 print(f"  MACD: {ind['macd']['macd']:.2f} / Signal: {ind['macd']['signal']:.2f}")
                 print(f"  MA: {ind['short_ma']:.2f} / {ind['long_ma']:.2f} / {ind['super_long_ma']:.2f}")
+                if config.use_5m_filter:
+                    print(f"  5m Trend: {strategy.current_trend_5m.value}")
             else:
                 print(f"Still need more bars. Have {len(strategy.bars)}, need ~{config.super_long_ma_length}")
         else:
