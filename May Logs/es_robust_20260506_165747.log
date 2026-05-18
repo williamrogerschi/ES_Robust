@@ -1,0 +1,57 @@
+Logging to: es_robust_20260506_165747.log
+
+============================================================
+🛡️  ES ROBUST BOT — SCALP ROBUST MODE
+   • 10 contract(s) max
+   • MACD momentum filter
+   • 5m trend alignment filter
+   • Session low short filter
+   • Trailing stop enabled
+   • SL: ~8 pts | TP: ~12 pts | Trail activates: +6 pts
+   • Session: 8:30–12:00 CT only
+   • Client ID: 11
+============================================================
+✓ Connected to IBKR (paper) - clientId=11
+✓ Front-month contract: ESM6 expiry=20260618
+
+============================================================
+Loading historical data for indicator warm-up...
+============================================================
+→ Fetching historical bars (1 D, 1 min)...
+✓ Loaded 1378 historical bars
+
+Processing 1378 historical bars...
+  📊 5m warmup: 275 bars built | trend: moderate_bullish | buffer: 3 bar(s) carried over
+
+Indicators ready!
+  Bars loaded: 1378
+  Last price: 7386.25
+  Trend: moderate_bearish
+  RSI: 38.5
+  ATR: 1.14
+  MACD: -1.10 / Signal: -1.21
+  MA: 7386.36 / 7389.12 / 7383.22
+  5m Trend: moderate_bullish
+
+------------------------------------------------------------
+Account Value: $1,057,067.70
+Buying Power: $4,227,370.48
+Current Position: 0 contracts
+------------------------------------------------------------
+
+============================================================
+Starting live 1-minute bar stream...
+Strategy is now ACTIVE (client ID: 11)
+============================================================
+
+→ Subscribed to 5-second real-time bars (aggregating to 1 min)
+
+[2026-05-06 15:57] O:7386.00 H:7386.25 L:7386.00 C:7386.00 V:14.0
+  📈 Trend: sideways (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7386.25 🔻 7385.25
+  📡 RSI: 37.0 | MACD: -1.00 (prev: -1.10) | ATR: 1.07
+  📊 Filled: 0 | Pending: 0 | 5m: moderate_bullish
+  🚫 5m trend mismatch: 1m=sideways vs 5m=moderate_bullish
+  💰 Daily P&L: $+0.00
+→ Real-time bars cancelled
+✓ Disconnected from IBKR

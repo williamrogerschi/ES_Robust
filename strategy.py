@@ -1,6 +1,7 @@
 """
 ES Futures Grid Trading Strategy - ROBUST VERSION
-Scalp robust mode only — includes MACD momentum filter.
+Scalp robust mode only — includes MACD momentum filter, raw trend filter,
+session low short filter, session high long filter, and 5m alignment filter.
 """
 
 import asyncio
@@ -19,57 +20,57 @@ class GridStrategy:
     def __init__(self, broker, config: StrategyConfig = None):
         self.broker = broker
         self.config = config or StrategyConfig()
-        
+
         # Price data
         self.bars: List[Dict] = []
         self.last_price: float = 0.0
-        
+
         # Indicators
         self.indicators = Indicators(self.config)
-        
+
         # Trend tracking
         self.current_trend = TrendState.SIDEWAYS
         self.previous_trend = TrendState.SIDEWAYS
         self.confirmed_trend = TrendState.SIDEWAYS
         self.trend_history: List[TrendState] = []
-        
+
         # Grid state
         self.grid_anchor_price: Optional[float] = None
         self.grid_anchor_time: Optional[datetime] = None
         self.grid_levels: List[float] = []
-        
+
         # Position tracking
         self.positions: List[Position] = []
         self.position_count: int = 0
-        
-        # PENDING ORDER TRACKING - orders submitted but not yet filled
-        self.pending_orders: Dict[int, PendingOrder] = {}  # order_id -> PendingOrder
-        
+
+        # PENDING ORDER TRACKING
+        self.pending_orders: Dict[int, PendingOrder] = {}
+
         # P&L tracking
         self.equity = self.config.initial_equity
         self.daily_pnl: float = 0.0
         self.last_reset_day: Optional[int] = None
         self.prev_rsi: float = 50.0
 
-        # --- MACD MOMENTUM FILTER ---
-        # Stores the MACD value from the previous bar so we can check
-        # whether MACD is rising or falling when an entry signal fires.
+        # MACD momentum filter
         self._prev_macd: float = 0.0
-
-        # Tracks every trade the MACD filter blocks for end-of-session analysis
         self._macd_blocked_trades: List[Dict] = []
 
-        self.bars_since_exit: int = 999  # Starts high so first entry is always allowed
+        self.bars_since_exit: int = 999
 
-        # Session low tracking for scalp_robust short filter
+        # Session low tracking for short filter
         self._session_low: float = float('inf')
         self._session_low_date: Optional[int] = None
+
+        # Session high tracking for long filter
+        self._session_high: float = float('-inf')
+        self._session_high_date: Optional[int] = None
 
         # 5-minute bar aggregation
         self.bars_5m: List[Dict] = []
         self.indicators_5m = Indicators(self.config)
         self.current_trend_5m: TrendState = TrendState.SIDEWAYS
-        self._5m_bar_buffer: List[Dict] = []  # accumulates 1-min bars until 5 collected
+        self._5m_bar_buffer: List[Dict] = []
 
     def _round_to_tick(self, price: float) -> float:
         return round(price / self.config.tick_size) * self.config.tick_size
@@ -227,9 +228,6 @@ class GridStrategy:
         return min(size, max_size)
 
     def _get_contracts(self) -> int:
-        """Returns contract size based on current ATR.
-        Drops to reduced size when ATR exceeds high volatility threshold.
-        """
         atr = self.indicators.cache.get('atr', 0)
         if atr >= self.config.atr_high_volatility_threshold:
             return self.config.contracts_per_trade_high_vol
@@ -239,10 +237,6 @@ class GridStrategy:
     # 5M BAR SEEDING FROM HISTORICAL DATA
     # -------------------------------------------------------------------------
     def seed_5m_bars(self, historical_bars: List[Dict]):
-        """Build 5m bars from historical 1m bars for indicator warmup.
-        Call once after historical warmup completes in main.py.
-        Fixes current_trend_5m being stuck on SIDEWAYS all session.
-        """
         buffer = []
         for bar in historical_bars:
             buffer.append(bar)
@@ -257,7 +251,6 @@ class GridStrategy:
                 }
                 self.bars_5m.append(bar_5m)
                 buffer = []
-        # Keep leftover bars as starting buffer for live aggregation
         self._5m_bar_buffer = buffer
         if self.indicators_5m.calculate_all(self.bars_5m):
             self.current_trend_5m = self._determine_trend_5m()
@@ -271,15 +264,7 @@ class GridStrategy:
     # MACD MOMENTUM FILTER
     # -------------------------------------------------------------------------
     def _macd_momentum_ok(self, direction: str) -> bool:
-        """Returns True if MACD is moving in the same direction as the trade.
-
-        For a LONG: we want MACD rising (current >= previous).
-        For a SHORT: we want MACD falling (current <= previous).
-
-        Flat (current == previous) is treated as a pass — blocking on zero
-        change is too strict and essentially never happens with floating point
-        EMA calculations anyway.
-        """
+        """Returns True if MACD is moving in the same direction as the trade."""
         current_macd = self.indicators.cache.get('macd', {}).get('macd', 0.0)
         if direction == 'long':
             return current_macd >= self._prev_macd
@@ -323,20 +308,21 @@ class GridStrategy:
                 threshold = self.config.volume_spike_multiplier * avg_vol
                 print(f"  🔇 Low volume ({bar['volume']:.0f} < threshold {threshold:.0f} | avg {avg_vol:.0f}) — skipping")
                 return
+
         trend = self.confirmed_trend
         rsi = self.indicators.cache.get('rsi', 50)
         current_price = bar['close']
         prev_bar = self.bars[-2]
         current_macd = self.indicators.cache.get('macd', {}).get('macd', 0.0)
 
+        # -------------------------------------------------------------------------
         # RAW TREND CONTRADICTION FILTER
-        # Block any trade where the raw (unconfirmed) trend directly contradicts
-        # the intended trade direction. Prevents entering against clear momentum
-        # even when confirmed trend hasn't caught up yet.
+        # Block trades where the unconfirmed raw trend directly contradicts
+        # the intended direction. Prevents entering against clear momentum even
+        # when the confirmed trend hasn't caught up yet.
+        # -------------------------------------------------------------------------
         raw_is_bullish = self.current_trend in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH]
         raw_is_bearish = self.current_trend in [TrendState.STRONG_BEARISH, TrendState.MODERATE_BEARISH]
-        confirmed_wants_short = trend in [TrendState.STRONG_BEARISH, TrendState.MODERATE_BEARISH] or trend == TrendState.SIDEWAYS
-        confirmed_wants_long = trend in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH] or trend == TrendState.SIDEWAYS
 
         def _raw_trend_blocks_short() -> bool:
             return raw_is_bullish
@@ -344,6 +330,9 @@ class GridStrategy:
         def _raw_trend_blocks_long() -> bool:
             return raw_is_bearish
 
+        # -------------------------------------------------------------------------
+        # SESSION LOW SHORT FILTER
+        # -------------------------------------------------------------------------
         def _short_blocked_by_session_low() -> bool:
             if not self.config.use_session_low_short_filter:
                 return False
@@ -360,7 +349,56 @@ class GridStrategy:
                 return True
             return False
 
-        if trend in [TrendState.STRONG_BEARISH, TrendState.MODERATE_BEARISH]:
+        # -------------------------------------------------------------------------
+        # SESSION HIGH LONG FILTER
+        # -------------------------------------------------------------------------
+        def _long_blocked_by_session_high() -> bool:
+            if not self.config.use_session_high_long_filter:
+                return False
+            bar_ct = bar['time'].astimezone(CENTRAL)
+            session_open = bar_ct.replace(hour=8, minute=30, second=0, microsecond=0)
+            hours_since_open = (bar_ct - session_open).total_seconds() / 3600
+            if hours_since_open < 0 or hours_since_open > self.config.session_high_long_hours:
+                return False
+            if self._session_high == float('-inf'):
+                return False
+            pts_below_high = self._session_high - current_price
+            if pts_below_high < self.config.session_high_long_buffer:
+                print(f"  🚫 Long blocked: price {current_price:.2f} is {pts_below_high:.1f} pts below session high {self._session_high:.2f} (limit: {self.config.session_high_long_buffer} pts, window: {self.config.session_high_long_hours:.1f} hrs)")
+                return True
+            return False
+
+        # -------------------------------------------------------------------------
+        # TIERED RSI ENTRY LOGIC
+        # Filter order per side: session filter → raw trend → MACD → entry
+        # Each trend state has its own RSI floor.
+        # -------------------------------------------------------------------------
+
+        if trend == TrendState.STRONG_BEARISH:
+            # Lenient RSI floor (35): trend is confirmed, catching continuation entries
+            # where RSI has been hammered down and won't recover to 55+
+            if rsi > self.config.entry_rsi_strong_bearish:
+                if current_price < prev_bar['low']:
+                    if not _short_blocked_by_session_low():
+                        if _raw_trend_blocks_short():
+                            print(f"  🚫 Raw trend blocks SHORT | raw: {self.current_trend.value}")
+                            return
+                        if not self._macd_momentum_ok('short'):
+                            print(f"  ⏭️ MACD filter blocked SHORT | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
+                            self._macd_blocked_trades.append({
+                                'time': bar['time'],
+                                'direction': 'short',
+                                'macd': current_macd,
+                                'prev_macd': self._prev_macd,
+                                'price': current_price,
+                                'rsi': rsi,
+                                'trend': trend.value
+                            })
+                            return
+                        await self._enter_short(current_price, rsi, trend)
+
+        elif trend == TrendState.MODERATE_BEARISH:
+            # Stricter RSI floor (55): trend is weaker, require overbought bounce
             if rsi > self.config.entry_rsi_bearish:
                 if current_price < prev_bar['low']:
                     if not _short_blocked_by_session_low():
@@ -380,26 +418,53 @@ class GridStrategy:
                             })
                             return
                         await self._enter_short(current_price, rsi, trend)
-        elif trend in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH]:
-            if rsi < self.config.entry_rsi_bullish:
+
+        elif trend == TrendState.STRONG_BULLISH:
+            # Lenient RSI floor (55): trend is confirmed, basic momentum check
+            if rsi > self.config.entry_rsi_strong_bullish:
                 if current_price > prev_bar['high']:
-                    if _raw_trend_blocks_long():
-                        print(f"  🚫 Raw trend blocks LONG | raw: {self.current_trend.value}")
-                        return
-                    if not self._macd_momentum_ok('long'):
-                        print(f"  ⏭️ MACD filter blocked LONG | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
-                        self._macd_blocked_trades.append({
-                            'time': bar['time'],
-                            'direction': 'long',
-                            'macd': current_macd,
-                            'prev_macd': self._prev_macd,
-                            'price': current_price,
-                            'rsi': rsi,
-                            'trend': trend.value
-                        })
-                        return
-                    await self._enter_long(current_price, rsi, trend)
+                    if not _long_blocked_by_session_high():
+                        if _raw_trend_blocks_long():
+                            print(f"  🚫 Raw trend blocks LONG | raw: {self.current_trend.value}")
+                            return
+                        if not self._macd_momentum_ok('long'):
+                            print(f"  ⏭️ MACD filter blocked LONG | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
+                            self._macd_blocked_trades.append({
+                                'time': bar['time'],
+                                'direction': 'long',
+                                'macd': current_macd,
+                                'prev_macd': self._prev_macd,
+                                'price': current_price,
+                                'rsi': rsi,
+                                'trend': trend.value
+                            })
+                            return
+                        await self._enter_long(current_price, rsi, trend)
+
+        elif trend == TrendState.MODERATE_BULLISH:
+            # Stricter RSI floor (60): trend is weaker, require stronger momentum
+            if rsi > self.config.entry_rsi_bullish:
+                if current_price > prev_bar['high']:
+                    if not _long_blocked_by_session_high():
+                        if _raw_trend_blocks_long():
+                            print(f"  🚫 Raw trend blocks LONG | raw: {self.current_trend.value}")
+                            return
+                        if not self._macd_momentum_ok('long'):
+                            print(f"  ⏭️ MACD filter blocked LONG | MACD: {current_macd:.2f} vs prev {self._prev_macd:.2f}")
+                            self._macd_blocked_trades.append({
+                                'time': bar['time'],
+                                'direction': 'long',
+                                'macd': current_macd,
+                                'prev_macd': self._prev_macd,
+                                'price': current_price,
+                                'rsi': rsi,
+                                'trend': trend.value
+                            })
+                            return
+                        await self._enter_long(current_price, rsi, trend)
+
         elif trend == TrendState.SIDEWAYS:
+            # Range-trading: mean-reversion thresholds — unchanged
             if rsi > self.config.entry_rsi_sideways_short:
                 if current_price < prev_bar['low']:
                     if not _short_blocked_by_session_low():
@@ -529,9 +594,7 @@ class GridStrategy:
                     else:
                         stop_loss = self._round_to_tick(fill_price + self.config.stop_loss_pts)
                         take_profit = self._round_to_tick(fill_price - self.config.take_profit_pts)
-
                 filled_qty = int(trade.orderStatus.filled)
-
                 stop_action = 'SELL' if pending.side == 'long' else 'BUY'
                 offset = self.config.stop_limit_offset_pts
                 if pending.side == 'long':
@@ -540,11 +603,9 @@ class GridStrategy:
                     stop_limit_price = self._round_to_tick(stop_loss + offset)
                 stop_trade = await self.broker.place_stop_limit_order(stop_action, filled_qty, stop_loss, stop_limit_price)
                 stop_order_id = stop_trade.order.orderId if stop_trade else None
-
                 tp_action = 'SELL' if pending.side == 'long' else 'BUY'
                 tp_trade = await self.broker.place_limit_order(tp_action, filled_qty, take_profit)
                 tp_order_id = tp_trade.order.orderId if tp_trade else None
-
                 position = Position(
                     side=pending.side,
                     entry_price=fill_price,
@@ -754,13 +815,22 @@ class GridStrategy:
         self.last_price = bar['close']
         current_day = bar['time'].day
 
-        # Track session low for scalp_robust short filter
+        # Track session low for short filter
         if self._session_low_date != current_day:
             self._session_low = bar['low']
             self._session_low_date = current_day
         else:
             if bar['low'] < self._session_low:
                 self._session_low = bar['low']
+
+        # Track session high for long filter
+        if self._session_high_date != current_day:
+            self._session_high = bar['high']
+            self._session_high_date = current_day
+        else:
+            if bar['high'] > self._session_high:
+                self._session_high = bar['high']
+
         if self.last_reset_day != current_day:
             if self.last_reset_day is not None:
                 print(f"\n📅 New trading day. Previous day P&L: ${self.daily_pnl:+,.2f}")
@@ -771,7 +841,6 @@ class GridStrategy:
         time_str = local_time.strftime('%Y-%m-%d %H:%M')
         print(f"\n[{time_str}] O:{bar['open']:.2f} H:{bar['high']:.2f} L:{bar['low']:.2f} C:{bar['close']:.2f} V:{bar['volume']}")
         # Snapshot PREVIOUS bar's MACD before recalculating indicators
-        # Must happen BEFORE calculate_all so we capture last bar's value, not current
         if self.indicators.cache:
             self._prev_macd = self.indicators.cache.get('macd', {}).get('macd', 0.0)
 
@@ -781,13 +850,10 @@ class GridStrategy:
             return
         self.previous_trend = self.confirmed_trend
         self.prev_rsi = self.indicators.cache.get('rsi', 50)
-
         self.bars_since_exit += 1
         self.current_trend = self._determine_trend()
         self._get_confirmed_trend()
 
-        # 5M BAR AGGREGATION (live bars only)
-        # seed_5m_bars() handles historical warmup — this only processes live bars.
         if self.config.use_5m_filter:
             self._5m_bar_buffer.append(bar)
             if len(self._5m_bar_buffer) >= 5:

@@ -1,0 +1,125 @@
+Logging to: es_robust_20260512_115107.log
+
+============================================================
+🛡️  ES ROBUST BOT — SCALP ROBUST MODE
+   • 10 contract(s) max
+   • MACD momentum filter
+   • 5m trend alignment filter
+   • Session low short filter
+   • Trailing stop enabled
+   • SL: ~8 pts | TP: ~12 pts | Trail activates: +6 pts
+   • Session: 8:30–12:00 CT only
+   • Client ID: 11
+============================================================
+✓ Connected to IBKR (paper) - clientId=11
+✓ Front-month contract: ESM6 expiry=20260618
+
+============================================================
+Loading historical data for indicator warm-up...
+============================================================
+→ Fetching historical bars (1 D, 1 min)...
+✓ Loaded 1072 historical bars
+
+Processing 1072 historical bars...
+  📊 5m warmup: 214 bars built | trend: strong_bearish | buffer: 2 bar(s) carried over
+
+Indicators ready!
+  Bars loaded: 1072
+  Last price: 7376.25
+  Trend: strong_bullish
+  RSI: 54.1
+  ATR: 2.57
+  MACD: 1.17 / Signal: 1.01
+  MA: 7376.40 / 7375.52 / 7396.91
+  5m Trend: strong_bearish
+
+------------------------------------------------------------
+Account Value: $1,062,853.08
+Buying Power: $3,587,425.64
+Current Position: -10 contracts
+------------------------------------------------------------
+
+============================================================
+Starting live 1-minute bar stream...
+Strategy is now ACTIVE (client ID: 11)
+============================================================
+
+→ Subscribed to 5-second real-time bars (aggregating to 1 min)
+
+[2026-05-12 10:51] O:7376.25 H:7378.25 L:7375.75 C:7377.50 V:3073.0
+  📈 Trend: sideways (raw: strong_bullish)
+  🗺️  Grid: 0.080% | 🔺 7377.75 🔻 7376.25
+  📡 RSI: 52.5 | MACD: 1.08 (prev: 1.17) | ATR: 2.59
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bearish
+  🚫 5m trend mismatch: 1m=sideways vs 5m=strong_bearish
+  💰 Daily P&L: $+0.00
+
+[2026-05-12 10:52] O:7377.50 H:7378.25 L:7376.00 C:7376.75 V:1841.0
+  📈 Trend: sideways (raw: moderate_bullish)
+  🗺️  Grid: 0.080% | 🔺 7378.25 🔻 7375.75
+  📡 RSI: 51.7 | MACD: 0.95 (prev: 1.08) | ATR: 2.61
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bearish
+  🚫 5m trend mismatch: 1m=sideways vs 5m=strong_bearish
+  💰 Daily P&L: $+0.00
+
+[2026-05-12 10:53] O:7376.75 H:7378.00 L:7375.75 C:7376.25 V:1750.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7378.25 🔻 7376.00
+  📡 RSI: 49.2 | MACD: 0.79 (prev: 0.95) | ATR: 2.59
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bearish
+  🚫 5m trend mismatch: 1m=moderate_bullish vs 5m=strong_bearish
+  💰 Daily P&L: $+0.00
+
+[2026-05-12 10:54] O:7376.00 H:7377.75 L:7375.75 C:7376.25 V:1770.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7378.00 🔻 7375.75
+  📡 RSI: 54.5 | MACD: 0.66 (prev: 0.79) | ATR: 2.52
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bearish
+  🚫 5m trend mismatch: 1m=moderate_bullish vs 5m=strong_bearish
+  💰 Daily P&L: $+0.00
+
+[2026-05-12 10:55] O:7376.00 H:7377.00 L:7374.50 C:7376.75 V:2878.0
+  📈 Trend: moderate_bullish
+  🗺️  Grid: 0.080% | 🔺 7377.75 🔻 7375.75
+  📡 RSI: 54.5 | MACD: 0.59 (prev: 0.66) | ATR: 2.48
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bearish
+  🚫 5m trend mismatch: 1m=moderate_bullish vs 5m=strong_bearish
+  💰 Daily P&L: $+0.00
+
+[2026-05-12 10:56] O:7377.00 H:7377.50 L:7374.50 C:7375.00 V:2189.0
+  📈 Trend: moderate_bullish (raw: moderate_bearish)
+  🗺️  Grid: 0.080% | 🔺 7377.00 🔻 7374.50
+  📡 RSI: 33.3 | MACD: 0.38 (prev: 0.59) | ATR: 2.39
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bearish
+  🚫 5m trend mismatch: 1m=moderate_bullish vs 5m=strong_bearish
+  💰 Daily P&L: $+0.00
+
+[2026-05-12 10:57] O:7375.00 H:7376.25 L:7372.00 C:7372.50 V:2875.0
+  📈 Trend: moderate_bearish
+  🗺️  Grid: 0.080% | 🔺 7377.50 🔻 7374.50
+  📡 RSI: 20.8 | MACD: 0.02 (prev: 0.38) | ATR: 2.57
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bearish
+  💰 Daily P&L: $+0.00
+
+[2026-05-12 10:58] O:7372.50 H:7372.50 L:7370.50 C:7370.75 V:3157.0
+  📈 Trend: moderate_bearish (raw: strong_bearish)
+  🗺️  Grid: 0.080% | 🔺 7376.25 🔻 7372.00
+  📡 RSI: 16.9 | MACD: -0.40 (prev: 0.02) | ATR: 2.50
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bearish
+  💰 Daily P&L: $+0.00
+
+[2026-05-12 10:59] O:7370.75 H:7371.75 L:7368.75 C:7370.00 V:3091.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7372.50 🔻 7370.50
+  📡 RSI: 17.9 | MACD: -0.79 (prev: -0.40) | ATR: 2.50
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bearish
+  💰 Daily P&L: $+0.00
+
+[2026-05-12 11:00] O:7369.75 H:7370.75 L:7366.25 C:7370.00 V:4757.0
+  📈 Trend: strong_bearish
+  🗺️  Grid: 0.080% | 🔺 7371.75 🔻 7368.75
+  📡 RSI: 13.2 | MACD: -1.08 (prev: -0.79) | ATR: 2.70
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bearish
+  💰 Daily P&L: $+0.00
+→ Real-time bars cancelled
+✓ Disconnected from IBKR

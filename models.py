@@ -77,9 +77,41 @@ class StrategyConfig:
     rsi_overbought: int = 70
     rsi_oversold: int = 30
 
-    # RSI entry thresholds
-    entry_rsi_bearish: float = 55.0
-    entry_rsi_bullish: float = 45.0
+    # -------------------------------------------------------------------------
+    # TIERED RSI ENTRY THRESHOLDS (scalp mode only)
+    #
+    # Shorts fire when RSI > threshold. Longs fire when RSI > threshold.
+    #
+    # STRONG trend states use a lenient floor:
+    #   strong_bearish shorts  → RSI > 35
+    #     Trend is very confirmed. RSI gets hammered to 15-40 on sustained
+    #     bearish days and never bounces to 55. Requiring RSI > 35 allows
+    #     continuation entries without demanding a full overbought bounce.
+    #
+    #   strong_bullish longs   → RSI > 55
+    #     Trend is very confirmed. Basic momentum check — RSI just needs to
+    #     show the move has life, not be at extreme overbought.
+    #
+    # MODERATE trend states use a stricter floor:
+    #   moderate_bearish shorts → RSI > 55
+    #     Trend is weaker. Require a meaningful overbought bounce before
+    #     entering — confirmation that resistance is being tested.
+    #
+    #   moderate_bullish longs  → RSI > 60
+    #     Trend is weaker. Require stronger momentum confirmation.
+    #
+    # SIDEWAYS uses fixed mean-reversion thresholds (unchanged):
+    #   sideways shorts → RSI > 70 (overbought)
+    #   sideways longs  → RSI < 30 (oversold)
+    #
+    # NOTE: Grid mode (_check_entries) uses entry_rsi_bearish and
+    #       entry_rsi_bullish only, with REVERSED logic for longs
+    #       (rsi < threshold = mean-reversion dip buy). No tiering in grid mode.
+    # -------------------------------------------------------------------------
+    entry_rsi_strong_bearish: float = 35.0   # strong_bearish shorts
+    entry_rsi_bearish: float = 55.0          # moderate_bearish shorts
+    entry_rsi_strong_bullish: float = 55.0   # strong_bullish longs
+    entry_rsi_bullish: float = 60.0          # moderate_bullish longs
     entry_rsi_sideways_short: float = 70.0
     entry_rsi_sideways_long: float = 30.0
 
@@ -125,7 +157,6 @@ class StrategyConfig:
     contracts_per_trade: int = 1
 
     # ATR-based position sizing
-    # If ATR >= atr_high_volatility_threshold, use reduced contracts
     atr_high_volatility_threshold: float = 4.5
     contracts_per_trade_high_vol: int = 5
 
@@ -133,8 +164,7 @@ class StrategyConfig:
     use_grid_stop: bool = False
     grid_stop_buffer_pts: float = 6.0
 
-    # Stop-limit offset: how far below (long) or above (short) the stop price to set the limit
-    # Prevents catastrophic slippage on stop fills — set to 0 to use plain market stop
+    # Stop-limit offset
     stop_limit_offset_pts: float = 4.0
 
     # Trend-following entry (scalp_aggressive only)
@@ -144,7 +174,7 @@ class StrategyConfig:
     trend_follow_allow_moderate: bool = False
     post_exit_cooldown_bars: int = 2
 
-    # scalp_robust filters
+    # Session filter
     use_session_filter: bool = False
     session_start_hour: int = 9
     session_start_minute: int = 30
@@ -155,10 +185,17 @@ class StrategyConfig:
     volume_spike_multiplier: float = 1.5
     volume_lookback: int = 20
 
-    # Session low short filter (scalp_robust only)
+    # Session low short filter
+    # Blocks shorts when price is too far above session low
     use_session_low_short_filter: bool = False
-    session_low_short_buffer: float = 10.0   # pts above session low to block shorts
-    session_low_short_hours: float = 2.0     # hours after open to apply filter
+    session_low_short_buffer: float = 10.0
+    session_low_short_hours: float = 2.0
+
+    # Session high long filter (mirrors session low short filter)
+    # Blocks longs when price is too close to session high
+    use_session_high_long_filter: bool = False
+    session_high_long_buffer: float = 10.0
+    session_high_long_hours: float = 2.0
 
     # Account
     initial_equity: float = 100000.0
@@ -185,8 +222,10 @@ def get_scalp_config() -> StrategyConfig:
         max_loss_per_day_pct=100.0,
         trend_confirmation_bars=2,
         use_trend_reversal_exit=False,
+        entry_rsi_strong_bearish=35.0,
         entry_rsi_bearish=55.0,
-        entry_rsi_bullish=45.0,
+        entry_rsi_strong_bullish=55.0,
+        entry_rsi_bullish=60.0,
         entry_rsi_sideways_short=70.0,
         entry_rsi_sideways_long=30.0,
         contracts_per_trade=10,
@@ -197,6 +236,9 @@ def get_scalp_config() -> StrategyConfig:
         session_start_minute=30,
         session_end_hour=14,
         session_end_minute=30,
+        use_session_high_long_filter=True,
+        session_high_long_buffer=10.0,
+        session_high_long_hours=2.0,
     )
 
 
@@ -213,8 +255,9 @@ def get_grid_config() -> StrategyConfig:
         max_loss_per_day_pct=2.0,
         trend_confirmation_bars=3,
         use_trend_reversal_exit=False,
+        # Grid mode uses only entry_rsi_bearish / entry_rsi_bullish (no tiering)
         entry_rsi_bearish=60.0,
-        entry_rsi_bullish=40.0,
+        entry_rsi_bullish=40.0,   # Grid: RSI < 40 for longs (mean-reversion dip buy)
         entry_rsi_sideways_short=70.0,
         entry_rsi_sideways_long=30.0,
         contracts_per_trade=3,
@@ -242,8 +285,10 @@ def get_scalp_robust_config() -> StrategyConfig:
         max_loss_per_day_pct=100.0,
         trend_confirmation_bars=2,
         use_trend_reversal_exit=False,
+        entry_rsi_strong_bearish=35.0,
         entry_rsi_bearish=55.0,
-        entry_rsi_bullish=45.0,
+        entry_rsi_strong_bullish=55.0,
+        entry_rsi_bullish=60.0,
         entry_rsi_sideways_short=70.0,
         entry_rsi_sideways_long=30.0,
         contracts_per_trade=10,
@@ -261,6 +306,9 @@ def get_scalp_robust_config() -> StrategyConfig:
         use_session_low_short_filter=True,
         session_low_short_buffer=10.0,
         session_low_short_hours=2.0,
+        use_session_high_long_filter=True,
+        session_high_long_buffer=10.0,
+        session_high_long_hours=2.0,
     )
 
 
