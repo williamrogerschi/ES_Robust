@@ -523,16 +523,19 @@ class GridStrategy:
     async def _enter_long(self, level: float, rsi: float, trend: TrendState):
         level = self._round_to_tick(level)
         size = self._calculate_position_size(level)
-        stop_loss = self._round_to_tick(level * (1 - self.config.stop_loss_pct / 100))
-        take_profit = self._round_to_tick(level * (1 + self.config.take_profit_pct / 100))
-        trailing_stop = self._round_to_tick(level * (1 - self.config.trailing_stop_pct / 100)) if self.config.use_trailing_stop else None
+        atr = self.indicators.cache.get('atr', 0)
         contracts = self._get_contracts()
+        if self.config.use_atr_rr and atr > 0:
+            stop_loss = self._round_to_tick(level - atr * self.config.stop_loss_atr_mult)
+            take_profit = self._round_to_tick(level + atr * self.config.take_profit_atr_mult)
+        else:
+            stop_loss = self._round_to_tick(level * (1 - self.config.stop_loss_pct / 100))
+            take_profit = self._round_to_tick(level * (1 + self.config.take_profit_pct / 100))
         trade = await self.broker.place_limit_order('BUY', contracts, level)
         order_id = trade.order.orderId
-        pending = PendingOrder(order_id=order_id, side='long', limit_price=level, size=size, stop_loss=stop_loss, take_profit=take_profit, trailing_stop=trailing_stop, submit_time=datetime.now(UTC), grid_level=level)
+        pending = PendingOrder(order_id=order_id, side='long', limit_price=level, size=size, stop_loss=stop_loss, take_profit=take_profit, trailing_stop=None, submit_time=datetime.now(UTC), grid_level=level, entry_atr=atr)
         self.pending_orders[order_id] = pending
         reason = f"Grid Long ({trend.value}, RSI: {rsi:.1f})"
-        atr = self.indicators.cache.get('atr', 0)
         vol_note = f" [HIGH VOL ATR:{atr:.2f}→{contracts}cts]" if contracts < self.config.contracts_per_trade else f" [{contracts}cts]"
         print(f"  ⬆️ LONG ORDER @ {level:.2f} | Size: {size:.2f} | SL: {stop_loss:.2f} | TP: {take_profit:.2f}{vol_note}")
         print(f"     Reason: {reason}")
@@ -541,16 +544,19 @@ class GridStrategy:
     async def _enter_short(self, level: float, rsi: float, trend: TrendState):
         level = self._round_to_tick(level)
         size = self._calculate_position_size(level)
-        stop_loss = self._round_to_tick(level * (1 + self.config.stop_loss_pct / 100))
-        take_profit = self._round_to_tick(level * (1 - self.config.take_profit_pct / 100))
-        trailing_stop = self._round_to_tick(level * (1 + self.config.trailing_stop_pct / 100)) if self.config.use_trailing_stop else None
+        atr = self.indicators.cache.get('atr', 0)
         contracts = self._get_contracts()
+        if self.config.use_atr_rr and atr > 0:
+            stop_loss = self._round_to_tick(level + atr * self.config.stop_loss_atr_mult)
+            take_profit = self._round_to_tick(level - atr * self.config.take_profit_atr_mult)
+        else:
+            stop_loss = self._round_to_tick(level * (1 + self.config.stop_loss_pct / 100))
+            take_profit = self._round_to_tick(level * (1 - self.config.take_profit_pct / 100))
         trade = await self.broker.place_limit_order('SELL', contracts, level)
         order_id = trade.order.orderId
-        pending = PendingOrder(order_id=order_id, side='short', limit_price=level, size=size, stop_loss=stop_loss, take_profit=take_profit, trailing_stop=trailing_stop, submit_time=datetime.now(UTC), grid_level=level)
+        pending = PendingOrder(order_id=order_id, side='short', limit_price=level, size=size, stop_loss=stop_loss, take_profit=take_profit, trailing_stop=None, submit_time=datetime.now(UTC), grid_level=level, entry_atr=atr)
         self.pending_orders[order_id] = pending
         reason = f"Grid Short ({trend.value}, RSI: {rsi:.1f})"
-        atr = self.indicators.cache.get('atr', 0)
         vol_note = f" [HIGH VOL ATR:{atr:.2f}→{contracts}cts]" if contracts < self.config.contracts_per_trade else f" [{contracts}cts]"
         print(f"  ⬇️ SHORT ORDER @ {level:.2f} | Size: {size:.2f} | SL: {stop_loss:.2f} | TP: {take_profit:.2f}{vol_note}")
         print(f"     Reason: {reason}")
@@ -588,24 +594,28 @@ class GridStrategy:
                         take_profit = self._round_to_tick(fill_price - self.config.take_profit_pts)
                     print(f"     Grid stop: last level {last_level:.2f} + {self.config.grid_stop_buffer_pts}pt buffer → SL {stop_loss:.2f}")
                 else:
-                    if pending.side == 'long':
-                        stop_loss = self._round_to_tick(fill_price - self.config.stop_loss_pts)
-                        take_profit = self._round_to_tick(fill_price + self.config.take_profit_pts)
+                    if self.config.use_atr_rr and pending.entry_atr > 0:
+                        sl_pts = pending.entry_atr * self.config.stop_loss_atr_mult
+                        tp_pts = pending.entry_atr * self.config.take_profit_atr_mult
                     else:
-                        stop_loss = self._round_to_tick(fill_price + self.config.stop_loss_pts)
-                        take_profit = self._round_to_tick(fill_price - self.config.take_profit_pts)
+                        sl_pts = self.config.stop_loss_pts
+                        tp_pts = self.config.take_profit_pts
+                    if pending.side == 'long':
+                        stop_loss = self._round_to_tick(fill_price - sl_pts)
+                        take_profit = self._round_to_tick(fill_price + tp_pts)
+                    else:
+                        stop_loss = self._round_to_tick(fill_price + sl_pts)
+                        take_profit = self._round_to_tick(fill_price - tp_pts)
                 filled_qty = int(trade.orderStatus.filled)
                 stop_action = 'SELL' if pending.side == 'long' else 'BUY'
-                offset = self.config.stop_limit_offset_pts
-                if pending.side == 'long':
-                    stop_limit_price = self._round_to_tick(stop_loss - offset)
-                else:
-                    stop_limit_price = self._round_to_tick(stop_loss + offset)
-                stop_trade = await self.broker.place_stop_limit_order(stop_action, filled_qty, stop_loss, stop_limit_price)
+                stop_trade = await self.broker.place_stop_market_order(stop_action, filled_qty, stop_loss)
                 stop_order_id = stop_trade.order.orderId if stop_trade else None
                 tp_action = 'SELL' if pending.side == 'long' else 'BUY'
                 tp_trade = await self.broker.place_limit_order(tp_action, filled_qty, take_profit)
                 tp_order_id = tp_trade.order.orderId if tp_trade else None
+                trail_activation_pts = (pending.entry_atr * self.config.trailing_activation_atr_mult
+                                        if self.config.use_atr_rr and pending.entry_atr > 0
+                                        else self.config.trailing_activation_pts)
                 position = Position(
                     side=pending.side,
                     entry_price=fill_price,
@@ -620,14 +630,15 @@ class GridStrategy:
                     tp_order_id=tp_order_id,
                     trailing_activated=False,
                     highest_price=fill_price if pending.side == 'long' else None,
-                    lowest_price=fill_price if pending.side == 'short' else None
+                    lowest_price=fill_price if pending.side == 'short' else None,
+                    entry_atr=pending.entry_atr,
                 )
                 self.positions.append(position)
                 self.position_count += 1
                 del self.pending_orders[order_id]
                 print(f"  ✅ FILL CONFIRMED: {pending.side.upper()} @ {fill_price:.2f} (order {order_id})")
                 print(f"     📊 Bracket placed: SL #{stop_order_id} @ {stop_loss:.2f} | TP #{tp_order_id} @ {take_profit:.2f}")
-                print(f"     Trail activates @ +{self.config.trailing_activation_pts:.1f} pts")
+                print(f"     Trail activates @ +{trail_activation_pts:.1f} pts")
             elif trade.orderStatus.status in ['Cancelled', 'ApiCancelled', 'Inactive']:
                 print(f"  ❌ Order {order_id} cancelled/expired - removing from pending")
                 del self.pending_orders[order_id]
@@ -689,8 +700,14 @@ class GridStrategy:
                 if position.highest_price is None or high > position.highest_price:
                     position.highest_price = high
                 profit_pts = position.highest_price - position.entry_price
-                if not position.trailing_activated and profit_pts >= self.config.trailing_activation_pts:
-                    new_stop = self._round_to_tick(position.entry_price + self.config.trailing_distance_pts)
+                trail_activation = (position.entry_atr * self.config.trailing_activation_atr_mult
+                                    if self.config.use_atr_rr and position.entry_atr > 0
+                                    else self.config.trailing_activation_pts)
+                trail_distance = (position.entry_atr * self.config.trailing_distance_atr_mult
+                                  if self.config.use_atr_rr and position.entry_atr > 0
+                                  else self.config.trailing_distance_pts)
+                if not position.trailing_activated and profit_pts >= trail_activation:
+                    new_stop = self._round_to_tick(position.entry_price + trail_distance)
                     if new_stop > position.stop_loss:
                         old_stop = position.stop_loss
                         confirmed = True
@@ -704,7 +721,7 @@ class GridStrategy:
                         else:
                             print(f"  ⚠️ Trail activation failed — IBKR did not confirm stop move. Will retry next bar.")
                 elif position.trailing_activated:
-                    new_stop = self._round_to_tick(position.highest_price - self.config.trailing_distance_pts)
+                    new_stop = self._round_to_tick(position.highest_price - trail_distance)
                     if new_stop > position.stop_loss:
                         old_stop = position.stop_loss
                         position.stop_loss = new_stop
@@ -716,8 +733,14 @@ class GridStrategy:
                 if position.lowest_price is None or low < position.lowest_price:
                     position.lowest_price = low
                 profit_pts = position.entry_price - position.lowest_price
-                if not position.trailing_activated and profit_pts >= self.config.trailing_activation_pts:
-                    new_stop = self._round_to_tick(position.entry_price - self.config.trailing_distance_pts)
+                trail_activation = (position.entry_atr * self.config.trailing_activation_atr_mult
+                                    if self.config.use_atr_rr and position.entry_atr > 0
+                                    else self.config.trailing_activation_pts)
+                trail_distance = (position.entry_atr * self.config.trailing_distance_atr_mult
+                                  if self.config.use_atr_rr and position.entry_atr > 0
+                                  else self.config.trailing_distance_pts)
+                if not position.trailing_activated and profit_pts >= trail_activation:
+                    new_stop = self._round_to_tick(position.entry_price - trail_distance)
                     if new_stop < position.stop_loss:
                         old_stop = position.stop_loss
                         confirmed = True
@@ -731,7 +754,7 @@ class GridStrategy:
                         else:
                             print(f"  ⚠️ Trail activation failed — IBKR did not confirm stop move. Will retry next bar.")
                 elif position.trailing_activated:
-                    new_stop = self._round_to_tick(position.lowest_price + self.config.trailing_distance_pts)
+                    new_stop = self._round_to_tick(position.lowest_price + trail_distance)
                     if new_stop < position.stop_loss:
                         old_stop = position.stop_loss
                         position.stop_loss = new_stop
@@ -905,7 +928,10 @@ class GridStrategy:
                 if pos.trailing_activated:
                     status += f" | 🔒 Trailing"
                 else:
-                    pts_to_activate = self.config.trailing_activation_pts - profit_pts
+                    trail_activation = (pos.entry_atr * self.config.trailing_activation_atr_mult
+                                        if self.config.use_atr_rr and pos.entry_atr > 0
+                                        else self.config.trailing_activation_pts)
+                    pts_to_activate = trail_activation - profit_pts
                     if pts_to_activate > 0:
                         status += f" | +{pts_to_activate:.1f} to trail"
             print(status)

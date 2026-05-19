@@ -37,6 +37,7 @@ class Position:
     trailing_activated: bool = False
     highest_price: Optional[float] = None  # For long positions
     lowest_price: Optional[float] = None   # For short positions
+    entry_atr: float = 0.0  # ATR at fill time, used for ATR-based trailing
 
 
 @dataclass
@@ -51,6 +52,7 @@ class PendingOrder:
     trailing_stop: Optional[float]
     submit_time: datetime
     grid_level: float
+    entry_atr: float = 0.0  # ATR captured at order submission, used for ATR-based SL/TP
 
 
 @dataclass
@@ -160,6 +162,14 @@ class StrategyConfig:
     atr_high_volatility_threshold: float = 4.5
     contracts_per_trade_high_vol: int = 5
 
+    # ATR-based R:R — when enabled, SL/TP/trail scale with entry ATR
+    # Replaces fixed stop_loss_pct / take_profit_pct / trailing_activation_pts in scalp mode
+    use_atr_rr: bool = False
+    stop_loss_atr_mult: float = 2.0        # SL = entry_atr × 2.0
+    take_profit_atr_mult: float = 3.0      # TP = entry_atr × 3.0
+    trailing_activation_atr_mult: float = 1.25  # trail activates at entry_atr × 1.25 profit
+    trailing_distance_atr_mult: float = 1.0     # trail follows at entry_atr × 1.0 from best price
+
     # Grid mode stop
     use_grid_stop: bool = False
     grid_stop_buffer_pts: float = 6.0
@@ -231,6 +241,11 @@ def get_scalp_config() -> StrategyConfig:
         contracts_per_trade=10,
         atr_high_volatility_threshold=4.5,
         contracts_per_trade_high_vol=5,
+        use_atr_rr=True,
+        stop_loss_atr_mult=2.0,
+        take_profit_atr_mult=3.0,
+        trailing_activation_atr_mult=1.25,
+        trailing_distance_atr_mult=1.0,
         use_session_filter=True,
         session_start_hour=8,
         session_start_minute=30,
@@ -294,6 +309,11 @@ def get_scalp_robust_config() -> StrategyConfig:
         contracts_per_trade=10,
         atr_high_volatility_threshold=4.5,
         contracts_per_trade_high_vol=5,
+        use_atr_rr=True,
+        stop_loss_atr_mult=2.0,
+        take_profit_atr_mult=3.0,
+        trailing_activation_atr_mult=1.25,
+        trailing_distance_atr_mult=1.0,
         use_session_filter=False,
         session_start_hour=8,
         session_start_minute=30,
