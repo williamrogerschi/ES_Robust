@@ -314,7 +314,7 @@ def get_scalp_robust_config() -> StrategyConfig:
         take_profit_atr_mult=3.0,
         trailing_activation_atr_mult=1.25,
         trailing_distance_atr_mult=1.0,
-        use_session_filter=False,
+        use_session_filter=True,
         session_start_hour=8,
         session_start_minute=30,
         session_end_hour=12,
