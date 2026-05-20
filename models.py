@@ -168,7 +168,7 @@ class StrategyConfig:
     stop_loss_atr_mult: float = 2.0        # SL = entry_atr × 2.0
     take_profit_atr_mult: float = 3.0      # TP = entry_atr × 3.0
     trailing_activation_atr_mult: float = 1.25  # trail activates at entry_atr × 1.25 profit
-    trailing_distance_atr_mult: float = 1.0     # trail follows at entry_atr × 1.0 from best price
+    trailing_distance_atr_mult: float = 0.75    # trail follows at entry_atr × 0.75 from best price
 
     # Grid mode stop
     use_grid_stop: bool = False
@@ -245,10 +245,10 @@ def get_scalp_config() -> StrategyConfig:
         stop_loss_atr_mult=2.0,
         take_profit_atr_mult=3.0,
         trailing_activation_atr_mult=1.25,
-        trailing_distance_atr_mult=1.0,
+        trailing_distance_atr_mult=0.75,
         use_session_filter=True,
         session_start_hour=8,
-        session_start_minute=30,
+        session_start_minute=45,
         session_end_hour=14,
         session_end_minute=30,
         use_session_high_long_filter=True,
@@ -313,10 +313,10 @@ def get_scalp_robust_config() -> StrategyConfig:
         stop_loss_atr_mult=2.0,
         take_profit_atr_mult=3.0,
         trailing_activation_atr_mult=1.25,
-        trailing_distance_atr_mult=1.0,
+        trailing_distance_atr_mult=0.75,
         use_session_filter=True,
         session_start_hour=8,
-        session_start_minute=30,
+        session_start_minute=45,
         session_end_hour=12,
         session_end_minute=0,
         use_5m_filter=True,
