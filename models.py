@@ -80,40 +80,33 @@ class StrategyConfig:
     rsi_oversold: int = 30
 
     # -------------------------------------------------------------------------
-    # TIERED RSI ENTRY THRESHOLDS (scalp mode only)
+    # RSI ENTRY THRESHOLDS (scalp mode)
     #
-    # Shorts fire when RSI > threshold. Longs fire when RSI > threshold.
+    # SHORTS — tiered by trend strength:
+    #   strong_bearish  → RSI > entry_rsi_strong_bearish (35)
+    #     Trend is very confirmed. RSI gets crushed to 15-40 on sustained
+    #     bearish days and never bounces to 55. Lower floor needed.
+    #   moderate_bearish → RSI > entry_rsi_bearish (55)
+    #     Weaker trend. Require a meaningful overbought bounce before entering.
     #
-    # STRONG trend states use a lenient floor:
-    #   strong_bearish shorts  → RSI > 35
-    #     Trend is very confirmed. RSI gets hammered to 15-40 on sustained
-    #     bearish days and never bounces to 55. Requiring RSI > 35 allows
-    #     continuation entries without demanding a full overbought bounce.
+    # LONGS — dip-buy, single threshold (reverted from tiered momentum logic):
+    #   strong_bullish + moderate_bullish → RSI < entry_rsi_bullish (45)
+    #     Low RSI = the setup, not the warning. Every winning long in the
+    #     historical sample fired at RSI 23-44. Requiring high RSI for longs
+    #     inverts the mean-reversion thesis and eliminates the edge.
+    #     Robust bot uses raw-trend contradiction + MACD as the falling-knife
+    #     guard instead.
     #
-    #   strong_bullish longs   → RSI > 55
-    #     Trend is very confirmed. Basic momentum check — RSI just needs to
-    #     show the move has life, not be at extreme overbought.
-    #
-    # MODERATE trend states use a stricter floor:
-    #   moderate_bearish shorts → RSI > 55
-    #     Trend is weaker. Require a meaningful overbought bounce before
-    #     entering — confirmation that resistance is being tested.
-    #
-    #   moderate_bullish longs  → RSI > 60
-    #     Trend is weaker. Require stronger momentum confirmation.
-    #
-    # SIDEWAYS uses fixed mean-reversion thresholds (unchanged):
-    #   sideways shorts → RSI > 70 (overbought)
-    #   sideways longs  → RSI < 30 (oversold)
+    # SIDEWAYS — fixed mean-reversion thresholds:
+    #   shorts → RSI > entry_rsi_sideways_short (70)
+    #   longs  → RSI < entry_rsi_sideways_long  (30)
     #
     # NOTE: Grid mode (_check_entries) uses entry_rsi_bearish and
-    #       entry_rsi_bullish only, with REVERSED logic for longs
-    #       (rsi < threshold = mean-reversion dip buy). No tiering in grid mode.
+    #       entry_rsi_bullish only. No tiering in grid mode.
     # -------------------------------------------------------------------------
     entry_rsi_strong_bearish: float = 35.0   # strong_bearish shorts
     entry_rsi_bearish: float = 55.0          # moderate_bearish shorts
-    entry_rsi_strong_bullish: float = 55.0   # strong_bullish longs
-    entry_rsi_bullish: float = 60.0          # moderate_bullish longs
+    entry_rsi_bullish: float = 45.0          # all bullish longs (rsi < this)
     entry_rsi_sideways_short: float = 70.0
     entry_rsi_sideways_long: float = 30.0
 
@@ -165,16 +158,16 @@ class StrategyConfig:
     # ATR-based R:R — when enabled, SL/TP/trail scale with entry ATR
     # Replaces fixed stop_loss_pct / take_profit_pct / trailing_activation_pts in scalp mode
     use_atr_rr: bool = False
-    stop_loss_atr_mult: float = 2.0        # SL = entry_atr × 2.0
-    take_profit_atr_mult: float = 3.0      # TP = entry_atr × 3.0
-    trailing_activation_atr_mult: float = 1.25  # trail activates at entry_atr × 1.25 profit
-    trailing_distance_atr_mult: float = 0.75    # trail follows at entry_atr × 0.75 from best price
+    stop_loss_atr_mult: float = 2.0              # SL = entry_atr × 2.0
+    take_profit_atr_mult: float = 3.0            # TP = entry_atr × 3.0
+    trailing_activation_atr_mult: float = 1.25   # trail activates at entry_atr × 1.25 profit
+    trailing_distance_atr_mult: float = 0.75     # trail follows at entry_atr × 0.75 from best price
 
     # Grid mode stop
     use_grid_stop: bool = False
     grid_stop_buffer_pts: float = 6.0
 
-    # Stop-limit offset
+    # Stop-limit offset (legacy — SL orders now use stop-market)
     stop_limit_offset_pts: float = 4.0
 
     # Trend-following entry (scalp_aggressive only)
@@ -234,8 +227,7 @@ def get_scalp_config() -> StrategyConfig:
         use_trend_reversal_exit=False,
         entry_rsi_strong_bearish=35.0,
         entry_rsi_bearish=55.0,
-        entry_rsi_strong_bullish=55.0,
-        entry_rsi_bullish=60.0,
+        entry_rsi_bullish=45.0,
         entry_rsi_sideways_short=70.0,
         entry_rsi_sideways_long=30.0,
         contracts_per_trade=10,
@@ -270,9 +262,8 @@ def get_grid_config() -> StrategyConfig:
         max_loss_per_day_pct=2.0,
         trend_confirmation_bars=3,
         use_trend_reversal_exit=False,
-        # Grid mode uses only entry_rsi_bearish / entry_rsi_bullish (no tiering)
         entry_rsi_bearish=60.0,
-        entry_rsi_bullish=40.0,   # Grid: RSI < 40 for longs (mean-reversion dip buy)
+        entry_rsi_bullish=40.0,
         entry_rsi_sideways_short=70.0,
         entry_rsi_sideways_long=30.0,
         contracts_per_trade=3,
@@ -302,8 +293,7 @@ def get_scalp_robust_config() -> StrategyConfig:
         use_trend_reversal_exit=False,
         entry_rsi_strong_bearish=35.0,
         entry_rsi_bearish=55.0,
-        entry_rsi_strong_bullish=55.0,
-        entry_rsi_bullish=60.0,
+        entry_rsi_bullish=45.0,
         entry_rsi_sideways_short=70.0,
         entry_rsi_sideways_long=30.0,
         contracts_per_trade=10,

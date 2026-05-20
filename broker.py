@@ -143,7 +143,7 @@ class IBKRBroker:
         return trade
 
     async def place_stop_order(self, action: str, quantity: int, stop_price: float) -> Optional[Trade]:
-        """Plain market stop — consider place_stop_limit_order to prevent slippage."""
+        """Plain market stop."""
         if not self.contract:
             raise RuntimeError("Contract not set")
         order = Order(action=action, orderType='STP', totalQuantity=quantity,
@@ -154,18 +154,30 @@ class IBKRBroker:
         await asyncio.sleep(0.1)
         return trade
 
+    async def place_stop_market_order(self, action: str, quantity: int,
+                                       stop_price: float) -> Optional[Trade]:
+        """Stop-market order — triggers at stop_price, fills at market.
+        Used for SL brackets to avoid stop-limit partial fill slippage.
+        """
+        if not self.contract:
+            raise RuntimeError("Contract not set")
+        order = Order(
+            action=action,
+            orderType='STP',
+            totalQuantity=quantity,
+            auxPrice=stop_price,
+            tif='GTC',
+            transmit=True
+        )
+        trade = self.ib.placeOrder(self.contract, order)
+        self._open_orders[order.orderId] = trade
+        print(f"  📤 Stop-Market {action} {quantity} @ {stop_price:.2f} submitted (ID: {order.orderId})")
+        await asyncio.sleep(0.1)
+        return trade
+
     async def place_stop_limit_order(self, action: str, quantity: int,
                                       stop_price: float, limit_price: float) -> Optional[Trade]:
-        """Place a stop-limit order to prevent catastrophic slippage on exits.
-
-        Triggers at stop_price, then fills at limit_price or better.
-          Long exits (SELL): limit_price = stop_price - offset  (floor on fill quality)
-          Short exits (BUY): limit_price = stop_price + offset  (ceiling on fill quality)
-
-        Risk: if price gaps MORE than the offset through the stop, the order won't fill
-        and the position stays open. Tune stop_limit_offset_pts in StrategyConfig to
-        balance slippage protection vs. non-fill risk.
-        """
+        """Place a stop-limit order (legacy — SL brackets now use place_stop_market_order)."""
         if not self.contract:
             raise RuntimeError("Contract not set")
         order = Order(
@@ -185,6 +197,7 @@ class IBKRBroker:
 
     async def modify_stop_order(self, order_id: int, new_stop_price: float) -> bool:
         """Modify an existing stop or stop-limit order to a new price.
+        For STP orders (stop-market), only auxPrice is updated.
         For STP LMT orders, the limit price shifts by the same delta as the stop.
         """
         for trade in self.ib.trades():
