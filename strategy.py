@@ -344,7 +344,7 @@ class GridStrategy:
             if self._session_low == float('inf'):
                 return False
             pts_above_low = current_price - self._session_low
-            if pts_above_low > self.config.session_low_short_buffer:
+            if pts_above_low < self.config.session_low_short_buffer:
                 print(f"  🚫 Short blocked: price {current_price:.2f} is {pts_above_low:.1f} pts above session low {self._session_low:.2f} (limit: {self.config.session_low_short_buffer} pts, window: {self.config.session_low_short_hours:.1f} hrs)")
                 return True
             return False
@@ -589,7 +589,12 @@ class GridStrategy:
                         take_profit = self._round_to_tick(fill_price - tp_pts)
                 filled_qty = int(trade.orderStatus.filled)
                 stop_action = 'SELL' if pending.side == 'long' else 'BUY'
-                stop_trade = await self.broker.place_stop_market_order(stop_action, filled_qty, stop_loss)
+                offset = self.config.stop_limit_offset_pts
+                if pending.side == 'long':
+                    stop_limit_price = self._round_to_tick(stop_loss - offset)
+                else:
+                    stop_limit_price = self._round_to_tick(stop_loss + offset)
+                stop_trade = await self.broker.place_stop_limit_order(stop_action, filled_qty, stop_loss, stop_limit_price)
                 stop_order_id = stop_trade.order.orderId if stop_trade else None
                 tp_action = 'SELL' if pending.side == 'long' else 'BUY'
                 tp_trade = await self.broker.place_limit_order(tp_action, filled_qty, take_profit)

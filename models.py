@@ -246,6 +246,9 @@ def get_scalp_config() -> StrategyConfig:
         use_session_high_long_filter=True,
         session_high_long_buffer=10.0,
         session_high_long_hours=2.0,
+        use_session_low_short_filter=True,
+        session_low_short_buffer=10.0,
+        session_low_short_hours=2.0,
     )
 
 
