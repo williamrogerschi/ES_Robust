@@ -253,7 +253,6 @@ class GridStrategy:
         buffer = []
         for bar in historical_bars:
             self._update_30m(bar)          # build 30m structure during warmup
-            self._regime_recent_bars.append(bar)  # seed range position calc
             buffer.append(bar)
             if len(buffer) >= 5:
                 bar_5m = {
@@ -407,18 +406,6 @@ class GridStrategy:
             if not (session_start <= bar_ct < session_end):
                 print(f"  🕐 Outside session ({bar_ct.strftime('%H:%M')} CT) — no entries")
                 return
-        if self.config.use_5m_filter:
-            def direction(t):
-                if t in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH]:
-                    return 'bull'
-                elif t in [TrendState.STRONG_BEARISH, TrendState.MODERATE_BEARISH]:
-                    return 'bear'
-                return 'sideways'
-            trend_1m_dir = direction(self.confirmed_trend)
-            trend_5m_dir = direction(self.current_trend_5m)
-            if trend_5m_dir != 'sideways' and trend_1m_dir != trend_5m_dir:
-                print(f"  🚫 5m trend mismatch: 1m={self.confirmed_trend.value} vs 5m={self.current_trend_5m.value}")
-                return
         if self.config.use_volume_filter and len(self.bars) >= self.config.volume_lookback:
             recent_vols = [b['volume'] for b in self.bars[-self.config.volume_lookback:]]
             avg_vol = sum(recent_vols) / len(recent_vols)
@@ -524,6 +511,20 @@ class GridStrategy:
 
         else:
             # ---- TRENDING MODE: directional entries with all robust filters ----
+            # 5m filter only applies in trending mode — in ranging mode the 5m
+            # trend lags too much and blocks valid mean-reversion entries
+            if self.config.use_5m_filter:
+                def direction(t):
+                    if t in [TrendState.STRONG_BULLISH, TrendState.MODERATE_BULLISH]:
+                        return 'bull'
+                    elif t in [TrendState.STRONG_BEARISH, TrendState.MODERATE_BEARISH]:
+                        return 'bear'
+                    return 'sideways'
+                trend_1m_dir = direction(self.confirmed_trend)
+                trend_5m_dir = direction(self.current_trend_5m)
+                if trend_5m_dir != 'sideways' and trend_1m_dir != trend_5m_dir:
+                    print(f"  🚫 5m trend mismatch: 1m={self.confirmed_trend.value} vs 5m={self.current_trend_5m.value}")
+                    return
             if trend == TrendState.STRONG_BEARISH:
                 if rsi > self.config.entry_rsi_strong_bearish:
                     if current_price < prev_bar['low']:
