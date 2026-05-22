@@ -1,0 +1,217 @@
+Logging to: es_robust_20260522_100804.log
+
+============================================================
+🛡️  ES ROBUST BOT — SCALP ROBUST MODE
+   • 10 contract(s) max
+   • MACD momentum filter
+   • 5m trend alignment filter
+   • Session low short filter
+   • Trailing stop enabled
+   • SL: ~8 pts | TP: ~12 pts | Trail activates: +6 pts
+   • Session: 8:30–12:00 CT only
+   • Client ID: 11
+============================================================
+✓ Connected to IBKR (paper) - clientId=11
+✓ Front-month contract: ESM6 expiry=20260618
+
+============================================================
+Loading historical data for indicator warm-up...
+============================================================
+→ Fetching historical bars (1 D, 1 min)...
+✓ Loaded 969 historical bars
+
+Processing 969 historical bars...
+  📊 5m warmup: 193 bars built | trend: sideways | buffer: 4 bar(s) carried over
+
+Indicators ready!
+  Bars loaded: 969
+  Last price: 7492.75
+  Trend: strong_bearish
+  RSI: 27.3
+  ATR: 5.00
+  MACD: -3.63 / Signal: -2.39
+  MA: 7500.59 / 7503.10 / 7490.13
+  5m Trend: sideways
+
+------------------------------------------------------------
+Account Value: $1,035,359.65
+Buying Power: $4,136,939.56
+Current Position: 0 contracts
+------------------------------------------------------------
+
+============================================================
+Starting live 1-minute bar stream...
+Strategy is now ACTIVE (client ID: 11)
+============================================================
+
+→ Subscribed to 5-second real-time bars (aggregating to 1 min)
+
+[2026-05-22 09:08] O:7492.75 H:7495.25 L:7491.75 C:7494.25 V:3156.0
+  📈 Trend: sideways (raw: strong_bearish) | 🌍 Regime: uncertain
+  🗺️  Grid: 0.080% | 🔺 7492.75 🔻 7491.25
+  📡 RSI: 34.2 | MACD: -3.56 (prev: -3.63) | ATR: 4.86
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:09] O:7494.50 H:7495.75 L:7491.50 C:7495.50 V:2942.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7495.25 🔻 7491.75
+  📡 RSI: 36.8 | MACD: -3.36 (prev: -3.56) | ATR: 4.95
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:10] O:7495.50 H:7497.75 L:7494.75 C:7496.00 V:3011.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7495.75 🔻 7491.50
+  📡 RSI: 36.3 | MACD: -3.13 (prev: -3.36) | ATR: 4.96
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:11] O:7496.00 H:7497.00 L:7494.00 C:7495.75 V:2396.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7497.75 🔻 7494.75
+  📡 RSI: 35.5 | MACD: -2.93 (prev: -3.13) | ATR: 4.91
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:12] O:7495.75 H:7497.50 L:7494.75 C:7496.00 V:2346.0
+  📈 Trend: strong_bearish (raw: moderate_bearish) | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7497.00 🔻 7494.00
+  📡 RSI: 23.8 | MACD: -2.72 (prev: -2.93) | ATR: 4.73
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:13] O:7496.00 H:7496.25 L:7489.25 C:7490.75 V:3934.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7497.50 🔻 7494.75
+  📡 RSI: 28.7 | MACD: -2.95 (prev: -2.72) | ATR: 4.36
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:14] O:7491.00 H:7491.75 L:7489.50 C:7489.75 V:2508.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7496.25 🔻 7489.25
+  📡 RSI: 31.6 | MACD: -3.17 (prev: -2.95) | ATR: 4.05
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:15] O:7490.00 H:7495.00 L:7488.50 C:7493.75 V:3399.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7491.75 🔻 7489.50
+  📡 RSI: 46.1 | MACD: -2.99 (prev: -3.17) | ATR: 3.98
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:16] O:7493.75 H:7494.50 L:7491.00 C:7492.50 V:2755.0
+  📈 Trend: strong_bearish (raw: moderate_bearish) | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7495.00 🔻 7488.50
+  📡 RSI: 41.8 | MACD: -2.91 (prev: -2.99) | ATR: 3.98
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:17] O:7492.50 H:7493.75 L:7491.00 C:7491.25 V:2267.0
+  📈 Trend: moderate_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7494.50 🔻 7491.00
+  📡 RSI: 39.6 | MACD: -2.92 (prev: -2.91) | ATR: 3.96
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:18] O:7491.25 H:7491.75 L:7488.00 C:7491.25 V:2864.0
+  📈 Trend: moderate_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7493.75 🔻 7491.00
+  📡 RSI: 42.2 | MACD: -2.89 (prev: -2.92) | ATR: 4.00
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:19] O:7491.00 H:7491.00 L:7488.00 C:7488.75 V:2197.0
+  📈 Trend: moderate_bearish (raw: strong_bearish) | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7491.75 🔻 7488.00
+  📡 RSI: 45.2 | MACD: -3.03 (prev: -2.89) | ATR: 3.55
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:20] O:7488.75 H:7490.25 L:7487.50 C:7488.75 V:2646.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7491.00 🔻 7488.00
+  📡 RSI: 43.2 | MACD: -3.11 (prev: -3.03) | ATR: 3.55
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:21] O:7488.75 H:7489.25 L:7486.00 C:7486.75 V:2779.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7490.25 🔻 7487.50
+  📡 RSI: 35.7 | MACD: -3.30 (prev: -3.11) | ATR: 3.68
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:22] O:7487.00 H:7487.50 L:7483.25 C:7484.25 V:3821.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7489.25 🔻 7486.00
+  📡 RSI: 27.3 | MACD: -3.61 (prev: -3.30) | ATR: 3.73
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:23] O:7484.50 H:7484.50 L:7479.25 C:7479.25 V:4820.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7487.50 🔻 7483.25
+  📡 RSI: 18.4 | MACD: -4.20 (prev: -3.61) | ATR: 3.80
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:24] O:7479.25 H:7484.50 L:7478.75 C:7484.00 V:4900.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7484.50 🔻 7479.25
+  📡 RSI: 30.0 | MACD: -4.25 (prev: -4.20) | ATR: 4.00
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:25] O:7484.00 H:7487.25 L:7482.75 C:7487.25 V:3718.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7484.50 🔻 7478.75
+  📡 RSI: 37.1 | MACD: -3.97 (prev: -4.25) | ATR: 4.11
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:26] O:7487.25 H:7488.50 L:7486.00 C:7486.25 V:3007.0
+  📈 Trend: strong_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7487.25 🔻 7482.75
+  📡 RSI: 35.6 | MACD: -3.79 (prev: -3.97) | ATR: 4.09
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:27] O:7486.50 H:7488.75 L:7485.25 C:7488.00 V:2424.0
+  📈 Trend: strong_bearish (raw: moderate_bearish) | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7488.50 🔻 7486.00
+  📡 RSI: 45.5 | MACD: -3.47 (prev: -3.79) | ATR: 3.84
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:28] O:7488.00 H:7489.25 L:7486.75 C:7489.25 V:2456.0
+  📈 Trend: moderate_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7488.75 🔻 7485.25
+  📡 RSI: 49.2 | MACD: -3.07 (prev: -3.47) | ATR: 3.86
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:29] O:7489.25 H:7491.50 L:7488.25 C:7491.25 V:4331.0
+  📈 Trend: moderate_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7489.25 🔻 7486.75
+  📡 RSI: 45.6 | MACD: -2.57 (prev: -3.07) | ATR: 3.62
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:30] O:7491.25 H:7492.25 L:7488.75 C:7490.75 V:3938.0
+  📈 Trend: moderate_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7491.50 🔻 7488.25
+  📡 RSI: 46.8 | MACD: -2.19 (prev: -2.57) | ATR: 3.62
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 09:31] O:7490.75 H:7492.75 L:7489.75 C:7491.50 V:3748.0
+  📈 Trend: moderate_bearish | 🌍 Regime: trending_bearish
+  🗺️  Grid: 0.080% | 🔺 7492.25 🔻 7488.75
+  📡 RSI: 50.5 | MACD: -1.80 (prev: -2.19) | ATR: 3.64
+  📊 Filled: 0 | Pending: 0 | 5m: sideways
+  💰 Daily P&L: $+0.00
+→ Real-time bars cancelled
+✓ Disconnected from IBKR

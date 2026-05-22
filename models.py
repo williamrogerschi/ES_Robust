@@ -16,6 +16,13 @@ class TrendState(Enum):
     SIDEWAYS = "sideways"
 
 
+class MarketRegime(Enum):
+    TRENDING_BULLISH = "trending_bullish"
+    TRENDING_BEARISH = "trending_bearish"
+    RANGING = "ranging"
+    UNCERTAIN = "uncertain"
+
+
 @dataclass
 class Position:
     """Tracks an open position with its associated IB orders."""
@@ -80,33 +87,26 @@ class StrategyConfig:
     rsi_oversold: int = 30
 
     # -------------------------------------------------------------------------
-    # RSI ENTRY THRESHOLDS (scalp mode)
+    # RSI ENTRY THRESHOLDS — restored to original Pine Script logic
     #
-    # SHORTS — tiered by trend strength:
-    #   strong_bearish  → RSI > entry_rsi_strong_bearish (35)
-    #     Trend is very confirmed. RSI gets crushed to 15-40 on sustained
-    #     bearish days and never bounces to 55. Lower floor needed.
-    #   moderate_bearish → RSI > entry_rsi_bearish (55)
-    #     Weaker trend. Require a meaningful overbought bounce before entering.
+    # Core philosophy: mean reversion WITHIN trend, not chasing breakdowns.
     #
-    # LONGS — dip-buy, single threshold (reverted from tiered momentum logic):
-    #   strong_bullish + moderate_bullish → RSI < entry_rsi_bullish (45)
-    #     Low RSI = the setup, not the warning. Every winning long in the
-    #     historical sample fired at RSI 23-44. Requiring high RSI for longs
-    #     inverts the mean-reversion thesis and eliminates the edge.
-    #     Robust bot uses raw-trend contradiction + MACD as the falling-knife
-    #     guard instead.
+    # SHORTS (both bearish states): RSI > 60
+    #   Wait for price to bounce back toward overbought in a downtrend,
+    #   then fade the exhaustion. Don't short the breakdown — short the rally.
     #
-    # SIDEWAYS — fixed mean-reversion thresholds:
-    #   shorts → RSI > entry_rsi_sideways_short (70)
-    #   longs  → RSI < entry_rsi_sideways_long  (30)
+    # LONGS (both bullish states): RSI < 40
+    #   Wait for a genuine oversold dip in an uptrend, then buy the bounce.
+    #   Don't buy breakouts — buy pullbacks.
     #
-    # NOTE: Grid mode (_check_entries) uses entry_rsi_bearish and
-    #       entry_rsi_bullish only. No tiering in grid mode.
+    # SIDEWAYS: RSI > 70 short, RSI < 30 long (extreme mean reversion only)
+    #
+    # RANGING MODE (detected by regime): RSI > 70 short, RSI < 30 long
+    #   Uses session high/low as range boundaries.
     # -------------------------------------------------------------------------
-    entry_rsi_strong_bearish: float = 35.0   # strong_bearish shorts
-    entry_rsi_bearish: float = 55.0          # moderate_bearish shorts
-    entry_rsi_bullish: float = 45.0          # all bullish longs (rsi < this)
+    entry_rsi_strong_bearish: float = 60.0   # strong_bearish shorts
+    entry_rsi_bearish: float = 60.0          # moderate_bearish shorts
+    entry_rsi_bullish: float = 40.0          # all bullish longs (rsi < this)
     entry_rsi_sideways_short: float = 70.0
     entry_rsi_sideways_long: float = 30.0
 
@@ -156,14 +156,40 @@ class StrategyConfig:
     contracts_per_trade_high_vol: int = 5
 
     # ATR-based R:R — when enabled, SL/TP/trail scale with entry ATR
-    # Replaces fixed stop_loss_pct / take_profit_pct / trailing_activation_pts in scalp mode
     use_atr_rr: bool = False
-    stop_loss_atr_mult: float = 2.0              # SL = entry_atr × 2.0
-    take_profit_atr_mult: float = 3.0            # TP = entry_atr × 3.0
-    trailing_activation_atr_mult: float = 1.25   # trail activates at entry_atr × 1.25 profit
-    trailing_distance_atr_mult: float = 0.75     # trail follows at entry_atr × 0.75 from best price
+    stop_loss_atr_mult: float = 2.0
+    take_profit_atr_mult: float = 3.0
+    trailing_activation_atr_mult: float = 1.25
+    trailing_distance_atr_mult: float = 0.75
+    min_stop_loss_pts: float = 8.0   # SL floor — prevents stop shrinking below viable level in low ATR
 
-    # Grid mode stop
+    atr_no_trade_threshold: float = 3.0  # don't enter if ATR below this (market too compressed)
+
+    # -------------------------------------------------------------------------
+    # MARKET REGIME DETECTION
+    #
+    # Classifies the market as TRENDING or RANGING each bar using 4 signals:
+    #   1. Trend flip count     — how many times 1m trend changed in last N bars
+    #   2. MACD zero-crossings  — how many times MACD crossed zero (oscillating = ranging)
+    #   3. ATR compressed       — ATR below threshold = volatility dried up
+    #   4. Trend instability    — current trend != confirmed trend
+    #
+    # Regime = RANGING if 2+ signals fire. TRENDING otherwise.
+    #
+    # In RANGING mode, entries switch to pure mean reversion:
+    #   Short: RSI > 70 AND price in top % of range (near session high)
+    #   Long:  RSI < 30 AND price in bottom % of range (near session low)
+    # -------------------------------------------------------------------------
+    use_regime_detection: bool = True
+    regime_lookback_bars: int = 20           # bars for flip/cross counting
+    regime_flip_threshold: int = 4           # trend direction flips in lookback = ranging signal
+    regime_macd_cross_threshold: int = 2     # MACD zero-crosses in lookback = ranging signal
+    regime_atr_threshold: float = 3.5        # ATR below this = compressed = ranging signal
+    regime_ranging_rsi_short: float = 70.0   # RSI threshold for ranging shorts (overbought)
+    regime_ranging_rsi_long: float = 35.0    # RSI threshold for ranging longs (oversold)
+    regime_range_pct_short: float = 0.70     # price must be in top 30% of range to short
+    regime_range_pct_long: float = 0.30      # price must be in bottom 30% of range to long
+    regime_range_lookback: int = 30          # bars to define the current range
     use_grid_stop: bool = False
     grid_stop_buffer_pts: float = 6.0
 
@@ -225,9 +251,9 @@ def get_scalp_config() -> StrategyConfig:
         max_loss_per_day_pct=100.0,
         trend_confirmation_bars=2,
         use_trend_reversal_exit=False,
-        entry_rsi_strong_bearish=35.0,
-        entry_rsi_bearish=55.0,
-        entry_rsi_bullish=45.0,
+        entry_rsi_strong_bearish=60.0,
+        entry_rsi_bearish=60.0,
+        entry_rsi_bullish=40.0,
         entry_rsi_sideways_short=70.0,
         entry_rsi_sideways_long=30.0,
         contracts_per_trade=10,
@@ -238,6 +264,11 @@ def get_scalp_config() -> StrategyConfig:
         take_profit_atr_mult=3.0,
         trailing_activation_atr_mult=1.25,
         trailing_distance_atr_mult=0.75,
+        min_stop_loss_pts=8.0,
+        regime_lookback_bars=20,
+        use_regime_detection=True,
+        regime_ranging_rsi_short=70.0,
+        regime_ranging_rsi_long=35.0,
         use_session_filter=True,
         session_start_hour=8,
         session_start_minute=45,
@@ -294,9 +325,9 @@ def get_scalp_robust_config() -> StrategyConfig:
         max_loss_per_day_pct=100.0,
         trend_confirmation_bars=2,
         use_trend_reversal_exit=False,
-        entry_rsi_strong_bearish=35.0,
-        entry_rsi_bearish=55.0,
-        entry_rsi_bullish=45.0,
+        entry_rsi_strong_bearish=60.0,
+        entry_rsi_bearish=60.0,
+        entry_rsi_bullish=40.0,
         entry_rsi_sideways_short=70.0,
         entry_rsi_sideways_long=30.0,
         contracts_per_trade=10,
@@ -307,6 +338,10 @@ def get_scalp_robust_config() -> StrategyConfig:
         take_profit_atr_mult=3.0,
         trailing_activation_atr_mult=1.25,
         trailing_distance_atr_mult=0.75,
+        min_stop_loss_pts=8.0,
+        use_regime_detection=True,
+        regime_ranging_rsi_short=70.0,
+        regime_ranging_rsi_long=35.0,
         use_session_filter=True,
         session_start_hour=8,
         session_start_minute=45,

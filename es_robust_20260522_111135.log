@@ -1,0 +1,101 @@
+Logging to: es_robust_20260522_111135.log
+
+============================================================
+🛡️  ES ROBUST BOT — SCALP ROBUST MODE
+   • 10 contract(s) max
+   • MACD momentum filter
+   • 5m trend alignment filter
+   • Session low short filter
+   • Trailing stop enabled
+   • SL: ~8 pts | TP: ~12 pts | Trail activates: +6 pts
+   • Session: 8:30–12:00 CT only
+   • Client ID: 11
+============================================================
+✓ Connected to IBKR (paper) - clientId=11
+✓ Front-month contract: ESM6 expiry=20260618
+
+============================================================
+Loading historical data for indicator warm-up...
+============================================================
+→ Fetching historical bars (1 D, 1 min)...
+✓ Loaded 1032 historical bars
+
+Processing 1032 historical bars...
+  📊 5m warmup: 206 bars built | trend: strong_bullish | buffer: 2 bar(s) carried over
+
+Indicators ready!
+  Bars loaded: 1032
+  Last price: 7503.00
+  Trend: strong_bullish
+  RSI: 58.1
+  ATR: 2.36
+  MACD: 2.12 / Signal: 2.05
+  MA: 7500.89 / 7496.01 / 7496.14
+  5m Trend: strong_bullish
+
+------------------------------------------------------------
+Account Value: $1,035,359.65
+Buying Power: $4,136,939.56
+Current Position: 0 contracts
+------------------------------------------------------------
+
+============================================================
+Starting live 1-minute bar stream...
+Strategy is now ACTIVE (client ID: 11)
+============================================================
+
+→ Subscribed to 5-second real-time bars (aggregating to 1 min)
+
+[2026-05-22 10:11] O:7503.00 H:7503.25 L:7501.50 C:7502.50 V:825.0
+  📈 Trend: sideways (raw: strong_bullish) | 🌍 Regime: uncertain
+  🗺️  Grid: 0.080% | 🔺 7504.50 🔻 7503.00
+  📡 RSI: 53.5 | MACD: 1.96 (prev: 2.12) | ATR: 2.32
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bullish
+  🚫 5m trend mismatch: 1m=sideways vs 5m=strong_bullish
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 10:12] O:7502.25 H:7504.00 L:7501.75 C:7503.25 V:1162.0
+  📈 Trend: strong_bullish | 🌍 Regime: uncertain
+  🗺️  Grid: 0.080% | 🔺 7503.25 🔻 7501.50
+  📡 RSI: 61.2 | MACD: 1.88 (prev: 1.96) | ATR: 2.29
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bullish
+  🔲 Regime: RANGING | Range pos: 79% | RSI: 61.2
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 10:13] O:7503.50 H:7504.50 L:7503.25 C:7504.25 V:1105.0
+  📈 Trend: strong_bullish | 🌍 Regime: ranging
+  🔲 Range pos: 79% | RSI needed: >70 short
+  🗺️  Grid: 0.080% | 🔺 7504.00 🔻 7501.75
+  📡 RSI: 62.3 | MACD: 1.87 (prev: 1.88) | ATR: 2.25
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bullish
+  🔲 Regime: RANGING | Range pos: 79% | RSI: 62.3
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 10:14] O:7504.25 H:7504.75 L:7503.00 C:7504.75 V:1460.0
+  📈 Trend: strong_bullish | 🌍 Regime: ranging
+  🔲 Range pos: 79% | RSI needed: >70 short
+  🗺️  Grid: 0.080% | 🔺 7504.50 🔻 7503.25
+  📡 RSI: 59.4 | MACD: 1.89 (prev: 1.87) | ATR: 2.20
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bullish
+  🔲 Regime: RANGING | Range pos: 79% | RSI: 59.4
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 10:15] O:7504.75 H:7505.50 L:7503.25 C:7505.00 V:1661.0
+  📈 Trend: strong_bullish | 🌍 Regime: ranging
+  🔲 Range pos: 79% | RSI needed: >70 short
+  🗺️  Grid: 0.080% | 🔺 7504.75 🔻 7503.00
+  📡 RSI: 60.0 | MACD: 1.89 (prev: 1.89) | ATR: 2.20
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bullish
+  🔲 Regime: RANGING | Range pos: 79% | RSI: 60.0
+  💰 Daily P&L: $+0.00
+
+[2026-05-22 10:16] O:7505.25 H:7506.50 L:7505.00 C:7505.75 V:1436.0
+  📈 Trend: strong_bullish | 🌍 Regime: ranging
+  🔲 Range pos: 79% | RSI needed: >70 short
+  🗺️  Grid: 0.080% | 🔺 7505.50 🔻 7503.25
+  📡 RSI: 64.6 | MACD: 1.94 (prev: 1.89) | ATR: 2.18
+  📊 Filled: 0 | Pending: 0 | 5m: strong_bullish
+  🔲 Regime: RANGING | Range pos: 79% | RSI: 64.6
+  💰 Daily P&L: $+0.00
+→ Real-time bars cancelled
+✓ Disconnected from IBKR
