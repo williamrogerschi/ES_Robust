@@ -126,8 +126,8 @@ class StrategyConfig:
     # Risk management - points-based
     stop_loss_pts: float = 8.0
     take_profit_pts: float = 12.0
-    trailing_activation_pts: float = 5.0
-    trailing_distance_pts: float = 5.0
+    trailing_activation_pts: float = 7.5  # static trail activation — guarantees meaningful profit lock-in
+    trailing_distance_pts: float = 1.5  # static trail distance — tight enough to lock in ~4.5pts min
 
     # Risk management - pct-based
     stop_loss_pct: float = 0.117
@@ -183,6 +183,7 @@ class StrategyConfig:
     use_regime_detection: bool = True
     regime_lookback_bars: int = 20           # bars for flip/cross counting
     regime_flip_threshold: int = 4           # trend direction flips in lookback = ranging signal
+
     regime_macd_cross_threshold: int = 2     # MACD zero-crosses in lookback = ranging signal
     regime_atr_threshold: float = 3.5        # ATR below this = compressed = ranging signal
     regime_ranging_rsi_short: float = 70.0   # RSI threshold for ranging shorts (overbought)
@@ -245,8 +246,8 @@ def get_scalp_config() -> StrategyConfig:
         stop_loss_pct=0.12,
         take_profit_pct=0.18,
         trailing_stop_pct=0.07,
-        trailing_activation_pts=6.0,
-        trailing_distance_pts=6.0,
+        trailing_activation_pts=7.5,
+        trailing_distance_pts=1.5,
         use_trailing_stop=True,
         max_loss_per_day_pct=100.0,
         trend_confirmation_bars=2,
@@ -319,8 +320,8 @@ def get_scalp_robust_config() -> StrategyConfig:
         stop_loss_pct=0.12,
         take_profit_pct=0.18,
         trailing_stop_pct=0.07,
-        trailing_activation_pts=6.0,
-        trailing_distance_pts=6.0,
+        trailing_activation_pts=7.5,
+        trailing_distance_pts=1.5,
         use_trailing_stop=True,
         max_loss_per_day_pct=100.0,
         trend_confirmation_bars=2,
